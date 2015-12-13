@@ -3,7 +3,7 @@ package cas.frontend;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
-public class ButtonPane extends JPanel {
+class ButtonPane extends JPanel {
 
 	/**
 	 * Create the panel.

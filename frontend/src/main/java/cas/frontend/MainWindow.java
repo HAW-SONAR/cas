@@ -2,32 +2,20 @@ package cas.frontend;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import cas.common.frontend.IMainWindow;
+
 import javax.swing.JScrollPane;
 
-public class MainWindow extends JFrame {
-
+class MainWindow extends JFrame implements IMainWindow {
+	static MainWindow frame ;
 	private final JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(final String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					final MainWindow frame = new MainWindow();
-					frame.setVisible(true);
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private final Console console;
 
 	/**
 	 * Create the frame.
@@ -40,7 +28,7 @@ public class MainWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		final Console console = new Console();
+		console = new Console();
 		console.setBounds(12, 12, 612, 644);
 		contentPane.add(console);
 
@@ -48,4 +36,10 @@ public class MainWindow extends JFrame {
 		buttonPane.setBounds(636, 12, 354, 644);
 		contentPane.add(buttonPane);
 	}
+
+	@Override
+	public void addMessage(final String message){
+		console.addMessage(message);
+	}
+
 }

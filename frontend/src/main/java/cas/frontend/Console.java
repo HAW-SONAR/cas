@@ -4,10 +4,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 
-public class Console extends JPanel {
-	private final JTextField textField;
+import java.awt.EventQueue;
+
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+
+class Console extends JPanel {
+	private final JTextField input;
+	private final JTextArea output;
 
 	/**
 	 * Create the panel.
@@ -19,13 +24,14 @@ public class Console extends JPanel {
 		scrollPane.setBounds(12, 12, 589, 567);
 		add(scrollPane);
 
-		final JTextPane textPane = new JTextPane();
-		scrollPane.setViewportView(textPane);
+		output = new JTextArea();
+		output.setEditable(false);
+		scrollPane.setViewportView(output);
 
-		textField = new JTextField();
-		textField.setBounds(12, 591, 460, 19);
-		add(textField);
-		textField.setColumns(10);
+		input = new JTextField();
+		input.setBounds(12, 591, 460, 19);
+		add(input);
+		input.setColumns(10);
 
 		final JButton btnSend = new JButton("Send");
 		btnSend.setBounds(484, 588, 117, 25);
@@ -33,4 +39,16 @@ public class Console extends JPanel {
 
 	}
 
+	public void addMessage(final String message){
+		if(message != null) {
+			EventQueue.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					output.append(message + "\n");
+				}
+			});
+		}
+	}
 }
+
+
