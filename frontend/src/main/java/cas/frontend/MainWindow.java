@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.lang.reflect.InvocationTargetException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -32,7 +33,15 @@ class MainWindow extends JFrame implements IMainWindow {
 		console.setBounds(12, 12, 612, 644);
 		contentPane.add(console);
 
-		final ButtonPane buttonPane = new ButtonPane();
+		final ButtonPane buttonPane = new ButtonPane(new IButtonActions() {
+
+			@Override
+			public void loadOrganisationFromFile() {
+				final JFileChooser fileChooser = new JFileChooser();
+				final int retVal = fileChooser.showOpenDialog(MainWindow.this);
+
+			}
+		});
 		buttonPane.setBounds(636, 12, 354, 644);
 		contentPane.add(buttonPane);
 	}
