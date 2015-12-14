@@ -1,6 +1,7 @@
 package cas.common.frontend;
 
-public interface IMainWindow {
-	void addMessage(String message);
+import cas.common.logger.IMessageReceiver;
+
+public interface IMainWindow extends IMessageReceiver{
 	void setVisible(boolean b);
 }
