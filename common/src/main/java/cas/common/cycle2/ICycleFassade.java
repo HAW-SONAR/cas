@@ -1,4 +1,4 @@
-package cas.common.Cycle;
+package cas.common.cycle2;
 
 public interface ICycleFassade {
 	void startCycle(String organisation);

@@ -1,6 +1,6 @@
 package cas.core.cycle;
 
-import cas.common.Cycle.ICycleFassade;
+import cas.common.cycle2.ICycleFassade;
 
 public class CycleFassade implements ICycleFassade {
 
