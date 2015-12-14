@@ -1,5 +1,5 @@
 package cas.frontend;
 
 public interface IFrontendInteractions {
-	public String createOrganisatinFromXml(String xmlValue);
+	public void createOrganisatinFromXml(String xmlValue);
 }

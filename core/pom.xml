@@ -20,12 +20,17 @@
 		</dependency>
 		<dependency>
 			<groupId>de.haw.hamburg.cas</groupId>
-			<artifactId>cas.cycle</artifactId>
+			<artifactId>cas.frontend</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.haw.hamburg.cas</groupId>
-			<artifactId>cas.frontend</artifactId>
+			<artifactId>cas.core.agentrepository</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>de.haw.hamburg.cas</groupId>
+			<artifactId>cas.core.cycle</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
