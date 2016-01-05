@@ -1,6 +1,6 @@
 package businessLogicLayer.setUp;
 
-import dataAccessLayer.entities.Organisation;
+import dataAccessLayer.Organisation;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
@@ -8,7 +8,7 @@ import dataAccessLayer.entities.Organisation;
 public class XmlOrganisationLoader implements IOrganisationLoader {
 
 
-  @Override public Organisation loadOrganisation(String filepath) {
+  public Organisation loadOrganisation(String filepath) {
     return null;
   }
 }

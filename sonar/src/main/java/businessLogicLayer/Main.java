@@ -1,9 +1,9 @@
 package businessLogicLayer;
 
-import businessLogicLayer.SonarCycle.ISonar;
+import businessLogicLayer.sonar.ISonar;
 import businessLogicLayer.setUp.IOrganisationLoader;
 import businessLogicLayer.setUp.XmlOrganisationLoader;
-import dataAccessLayer.entities.Organisation;
+import dataAccessLayer.Organisation;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.

@@ -1,6 +1,6 @@
-package businessLogicLayer.SonarCycle;
+package businessLogicLayer.sonar;
 
-import dataAccessLayer.entities.Organisation;
+import dataAccessLayer.Organisation;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.

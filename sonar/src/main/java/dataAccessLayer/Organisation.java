@@ -1,4 +1,4 @@
-package dataAccessLayer.entities;
+package dataAccessLayer;
 
 import java.util.List;
 
