@@ -1,11 +1,11 @@
-package dummy.implementations;
+package businessLogicLayer.sonar;
 
 import java.util.List;
 
-import dummy.interfaces.IOpa;
-import dummy.interfaces.IOrganisation;
-import dummy.interfaces.IProtocol;
-import dummy.interfaces.ISonar;
+import dataAccessLayer.IOpa;
+import dataAccessLayer.IOrganisation;
+import dataAccessLayer.IProtocol;
+import dataAccessLayer.Organisation;
 
 public class Sonar implements ISonar {
 
@@ -20,8 +20,8 @@ public class Sonar implements ISonar {
 	@Override
 	public void startSonar(IOrganisation organisation) {
 		// TODO Auto-generated method stub
-		List<IOpa> opas = organisation.getAllOpas();
-		List<IProtocol> protocols = organisation.getProtocols();
+		List<? extends IOpa> opas = organisation.getAllOpas();
+		List<? extends IProtocol> protocols = organisation.getProtocols();
 		int opaCounter = 0;
 		int protocolCounter = 0;
 		while (protocolCounter != protocols.size()) {

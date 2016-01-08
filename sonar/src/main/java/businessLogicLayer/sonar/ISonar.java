@@ -1,5 +1,6 @@
 package businessLogicLayer.sonar;
 
+import dataAccessLayer.IOrganisation;
 import dataAccessLayer.Organisation;
 
 /**
@@ -11,5 +12,5 @@ public interface ISonar {
    * Starts the Sonar process.
    * @param organisation Organisation that will be the subject.
    */
-  public void startSonar(Organisation organisation);
+  public void startSonar(IOrganisation organisation);
 }

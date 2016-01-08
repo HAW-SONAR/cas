@@ -1,4 +1,4 @@
-package dummy.interfaces;
+package dataAccessLayer;
 
 public interface IOpa extends IAgent {
 	

@@ -5,12 +5,13 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
  */
-public class Organisation {
+public class Organisation implements IOrganisation{
 
   private List<Opa> allOpas;
 
   public Organisation() {}
 
+  @Override
   public List<Opa> getAllOpas() {
     return allOpas;
   }
@@ -26,4 +27,40 @@ public class Organisation {
       throw new IllegalStateException("Opa was not part of this Organisation");
     }
   }
+
+@Override
+public List<IOma> getAllOmas() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void addOpa(IOpa opa) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void deleteOpa(IOpa opa) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public List<IProtocol> getProtocols() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void addOma(IOma oma) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void deleteOma(IOma oma) {
+	// TODO Auto-generated method stub
+	
+}
 }

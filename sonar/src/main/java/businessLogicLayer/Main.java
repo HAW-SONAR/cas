@@ -1,6 +1,7 @@
 package businessLogicLayer;
 
 import businessLogicLayer.sonar.ISonar;
+import businessLogicLayer.sonar.Sonar;
 import businessLogicLayer.setUp.IOrganisationLoader;
 import businessLogicLayer.setUp.XmlOrganisationLoader;
 import dataAccessLayer.Organisation;
@@ -14,7 +15,7 @@ public class Main {
     IOrganisationLoader orgLoader = new XmlOrganisationLoader();
     Organisation Org = orgLoader.loadOrganisation("/path/");
     //TODO instantiate sonar
-    ISonar sonar = null;
+    Sonar sonar = new Sonar();
     sonar.startSonar(Org);
   }
 }
