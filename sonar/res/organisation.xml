@@ -3,37 +3,37 @@
 <organisation>
     <protocols>
         <protocol>
-            <name>arrangeCelebration[landlord,smarthome]</name>
+            <name>arrangeCelebration</name>
                 <roles>
                     <role>landlord</role>
                     <role>smarthome</role>
                 </roles>
-            <file>arrangeCelebration%5Blandlord,smarthome%5D.pnml</file>
+            <file>file:///C:/organisation/protocols/arrangeCelebration.rnw</file>
         </protocol>
         <protocol>
-            <name>arrangeCelebration1[cook,butler]</name>
+            <name>arrangeCelebration1</name>
                 <roles>
                     <role>cook</role>
                     <role>butler</role>
                 </roles>
-            <file>arrangeCelebration1%5Bcook,butler%5D.pnml</file>
+            <file>file:///C:/organisation/protocols/arrangeCelebration1.rnw</file>
         </protocol>
         <protocol>
-            <name>arrangeCelebration2[cook2,baker]</name>
+            <name>arrangeCelebration2</name>
             <roles>
                 <role>cook2</role>
                 <role>baker</role>
             </roles>
-            <file>arrangeCelebration2%5Bcook2,baker%5D.pnml</file>
+            <file>file:///C:/organisation/protocols/arrangeCelebration2.rnw</file>
         </protocol>
         <protocol>
-            <name>arrangeCelebration3[butler3,brewer]</name>
+            <name>arrangeCelebration3</name>
             <roles>
                 <role>butler2</role>
                 <role>brewer</role>
             </roles>
-            <file>arrangeCelebration3%5Bbutler2,%20brewer%5D.pnml</file>
-        </protocol>
+			<file>file:///C:/organisation/protocols/arrangeCelebration3.rnw</file>
+		</protocol>
     </protocols>
     <opas>
         <opa>
@@ -41,13 +41,13 @@
             <tasks>
                 <exec>
                     <input>
-                        <protocol>aC</protocol>
+                        <protocol>arrangeCelebration</protocol>
                         <role>landlord</role>
                     </input>
                 </exec>
                 <split>
                     <input>
-                        <protocol>aC</protocol>
+                        <protocol>arrangeCelebration</protocol>
                         <roles>
                             <role>landlord</role>
                             <role>smarthome</role>
@@ -55,22 +55,22 @@
                     </input>
                     <outputs>
                         <output>
-                            <protocol>aC</protocol>
+                            <protocol>arrangeCelebration</protocol>
                             <role>landlord</role>
                         </output>
                         <output>
-                            <protocol>aC</protocol>
+                            <protocol>arrangeCelebration</protocol>
                             <role>smarthome</role>
                         </output>
                     </outputs>
                 </split>
                 <refine>
                     <input>
-                        <protocol>aC</protocol>
+                        <protocol>arrangeCelebration</protocol>
                         <role>smarthome</role>
                     </input>
                     <output>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <roles>
                             <role>cook</role>
                             <role>butler</role>
@@ -79,14 +79,14 @@
                 </refine>
                 <deleg>
                     <input>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <role>cook</role>
                     </input>
                     <to>O2</to>
                 </deleg>
                 <deleg>
                     <input>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <role>butler</role>
                     </input>
                     <to>O3</to>
@@ -106,19 +106,19 @@
             <tasks>
                 <exec>
                     <input>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <role>cook</role>
                     </input>
                 </exec>
                 <exec>
                     <input>
-                        <protocol>aC2</protocol>
+                        <protocol>arrangeCelebration2</protocol>
                         <role>cook2</role>
                     </input>
                 </exec>
                 <split>
                     <input>
-                        <protocol>aC2</protocol>
+                        <protocol>arrangeCelebration2</protocol>
                         <roles>
                             <role>cook2</role>
                             <role>baker</role>
@@ -126,22 +126,22 @@
                     </input>
                     <outputs>
                         <output>
-                            <protocol>aC2</protocol>
+                            <protocol>arrangeCelebration2</protocol>
                             <role>cook2</role>
                         </output>
                         <output>
-                            <protocol>aC2</protocol>
+                            <protocol>arrangeCelebration2</protocol>
                             <role>baker</role>
                         </output>
                     </outputs>
                 </split>
                 <refine>
                     <input>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <role>cook</role>
                     </input>
                     <output>
-                        <protocol>aC2</protocol>
+                        <protocol>arrangeCelebration2</protocol>
                         <roles>
                             <role>cook2</role>
                             <role>baker</role>
@@ -150,7 +150,7 @@
                 </refine>
                 <deleg>
                     <input>
-                        <protocol>aC2</protocol>
+                        <protocol>arrangeCelebration2</protocol>
                         <role>baker</role>
                     </input>
                     <to>O4</to>
@@ -171,19 +171,19 @@
             <tasks>
                 <exec>
                     <input>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <role>butler</role>
                     </input>
                 </exec>
                 <exec>
                     <input>
-                        <protocol>aC3</protocol>
+                        <protocol>arrangeCelebration3</protocol>
                         <role>butler2</role>
                     </input>
                 </exec>
                 <split>
                     <input>
-                        <protocol>aC3</protocol>
+                        <protocol>arrangeCelebration3</protocol>
                         <roles>
                             <role>butler2</role>
                             <role>brewer</role>
@@ -191,22 +191,22 @@
                     </input>
                     <outputs>
                         <output>
-                            <protocol>aC3</protocol>
+                            <protocol>arrangeCelebration3</protocol>
                             <role>butler2</role>
                         </output>
                         <output>
-                            <protocol>aC3</protocol>
+                            <protocol>arrangeCelebration3</protocol>
                             <role>brewer</role>
                         </output>
                     </outputs>
                 </split>
                 <refine>
                     <input>
-                        <protocol>aC1</protocol>
+                        <protocol>arrangeCelebration1</protocol>
                         <role>butler</role>
                     </input>
                     <output>
-                        <protocol>aC3</protocol>
+                        <protocol>arrangeCelebration3</protocol>
                         <roles>
                             <role>butler2</role>
                             <role>brewer</role>
@@ -215,7 +215,7 @@
                 </refine>
                 <deleg>
                     <input>
-                        <protocol>aC3</protocol>
+                        <protocol>arrangeCelebration3</protocol>
                         <role>brewer</role>
                     </input>
                     <to>O5</to>
@@ -236,7 +236,7 @@
             <tasks>
                 <exec>
                     <input>
-                        <protocol>aC2</protocol>
+                        <protocol>arrangeCelebration2</protocol>
                         <role>baker</role>
                     </input>
                 </exec>
@@ -255,7 +255,7 @@
             <tasks>
                 <exec>
                     <input>
-                        <protocol>aC3</protocol>
+                        <protocol>arrangeCelebration3</protocol>
                         <role>brewer</role>
                     </input>
                 </exec>
