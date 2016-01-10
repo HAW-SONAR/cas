@@ -5,7 +5,6 @@ import java.util.List;
 import dataAccessLayer.IOpa;
 import dataAccessLayer.IOrganisation;
 import dataAccessLayer.IProtocol;
-import dataAccessLayer.Organisation;
 
 public class Sonar implements ISonar {
 

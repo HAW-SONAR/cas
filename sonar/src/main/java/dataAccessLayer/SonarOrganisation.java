@@ -5,11 +5,11 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
  */
-public class Organisation implements IOrganisation{
+public class SonarOrganisation implements IOrganisation{
 
   private List<Opa> allOpas;
 
-  public Organisation() {}
+  public SonarOrganisation() {}
 
   @Override
   public List<Opa> getAllOpas() {
@@ -24,7 +24,7 @@ public class Organisation implements IOrganisation{
     if (allOpas.contains(opa)) {
       allOpas.remove(opa);
     } else {
-      throw new IllegalStateException("Opa was not part of this Organisation");
+      throw new IllegalStateException("Opa was not part of this SonarOrganisation");
     }
   }
 

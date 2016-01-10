@@ -1,5 +1,5 @@
 
-package mypackage;
+package xmlRawClasses;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType>
@@ -280,8 +280,15 @@ public class Organisation {
     @XmlElement(required = true)
     protected Organisation.Opas opas;
 
-    /**
-     * Gets the value of the protocols property.
+  @Override public String toString() {
+    return "Organisation{" +
+      "protocols=" + protocols +
+      ", opas=" + opas +
+      '}';
+  }
+
+  /**
+     * Ruft den Wert der protocols-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -293,7 +300,7 @@ public class Organisation {
     }
 
     /**
-     * Sets the value of the protocols property.
+     * Legt den Wert der protocols-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -305,7 +312,7 @@ public class Organisation {
     }
 
     /**
-     * Gets the value of the opas property.
+     * Ruft den Wert der opas-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -317,7 +324,7 @@ public class Organisation {
     }
 
     /**
-     * Sets the value of the opas property.
+     * Legt den Wert der opas-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -330,9 +337,9 @@ public class Organisation {
 
 
     /**
-     * <p>Java class for anonymous complex type.
+     * <p>Java-Klasse für anonymous complex type.
      * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
+     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
      * 
      * <pre>
      * &lt;complexType>
@@ -552,7 +559,13 @@ public class Organisation {
         @XmlElement(required = true)
         protected List<Organisation.Opas.Opa> opa;
 
-        /**
+      @Override public String toString() {
+        return "Opas{" +
+          "opa=" + opa +
+          '}';
+      }
+
+      /**
          * Gets the value of the opa property.
          * 
          * <p>
@@ -583,9 +596,9 @@ public class Organisation {
 
 
         /**
-         * <p>Java class for anonymous complex type.
+         * <p>Java-Klasse für anonymous complex type.
          * 
-         * <p>The following schema fragment specifies the expected content contained within this class.
+         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
          * 
          * <pre>
          * &lt;complexType>
@@ -795,7 +808,16 @@ public class Organisation {
         })
         public static class Opa {
 
-            @XmlElement(required = true)
+          @Override public String toString() {
+            return "Opa{" +
+              "name='" + name + '\'' +
+              ", tasks=" + tasks +
+              ", resources=" + resources +
+              ", communicationProtocols=" + communicationProtocols +
+              '}';
+          }
+
+          @XmlElement(required = true)
             protected String name;
             @XmlElement(required = true)
             protected Organisation.Opas.Opa.Tasks tasks;
@@ -805,7 +827,7 @@ public class Organisation {
             protected Organisation.Opas.Opa.CommunicationProtocols communicationProtocols;
 
             /**
-             * Gets the value of the name property.
+             * Ruft den Wert der name-Eigenschaft ab.
              * 
              * @return
              *     possible object is
@@ -817,7 +839,7 @@ public class Organisation {
             }
 
             /**
-             * Sets the value of the name property.
+             * Legt den Wert der name-Eigenschaft fest.
              * 
              * @param value
              *     allowed object is
@@ -829,7 +851,7 @@ public class Organisation {
             }
 
             /**
-             * Gets the value of the tasks property.
+             * Ruft den Wert der tasks-Eigenschaft ab.
              * 
              * @return
              *     possible object is
@@ -841,7 +863,7 @@ public class Organisation {
             }
 
             /**
-             * Sets the value of the tasks property.
+             * Legt den Wert der tasks-Eigenschaft fest.
              * 
              * @param value
              *     allowed object is
@@ -853,7 +875,7 @@ public class Organisation {
             }
 
             /**
-             * Gets the value of the resources property.
+             * Ruft den Wert der resources-Eigenschaft ab.
              * 
              * @return
              *     possible object is
@@ -865,7 +887,7 @@ public class Organisation {
             }
 
             /**
-             * Sets the value of the resources property.
+             * Legt den Wert der resources-Eigenschaft fest.
              * 
              * @param value
              *     allowed object is
@@ -877,7 +899,7 @@ public class Organisation {
             }
 
             /**
-             * Gets the value of the communicationProtocols property.
+             * Ruft den Wert der communicationProtocols-Eigenschaft ab.
              * 
              * @return
              *     possible object is
@@ -889,7 +911,7 @@ public class Organisation {
             }
 
             /**
-             * Sets the value of the communicationProtocols property.
+             * Legt den Wert der communicationProtocols-Eigenschaft fest.
              * 
              * @param value
              *     allowed object is
@@ -902,9 +924,9 @@ public class Organisation {
 
 
             /**
-             * <p>Java class for anonymous complex type.
+             * <p>Java-Klasse für anonymous complex type.
              * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
+             * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
              * 
              * <pre>
              * &lt;complexType>
@@ -935,8 +957,13 @@ public class Organisation {
                 "communicationProtocol"
             })
             public static class CommunicationProtocols {
+              @Override public String toString() {
+                return "CommunicationProtocols{" +
+                  "communicationProtocol=" + communicationProtocol +
+                  '}';
+              }
 
-                @XmlElement(required = true)
+              @XmlElement(required = true)
                 protected List<Organisation.Opas.Opa.CommunicationProtocols.CommunicationProtocol> communicationProtocol;
 
                 /**
@@ -970,9 +997,9 @@ public class Organisation {
 
 
                 /**
-                 * <p>Java class for anonymous complex type.
+                 * <p>Java-Klasse für anonymous complex type.
                  * 
-                 * <p>The following schema fragment specifies the expected content contained within this class.
+                 * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                  * 
                  * <pre>
                  * &lt;complexType>
@@ -993,12 +1020,17 @@ public class Organisation {
                     "name"
                 })
                 public static class CommunicationProtocol {
+                  @Override public String toString() {
+                    return "CommunicationProtocol{" +
+                      "name='" + name + '\'' +
+                      '}';
+                  }
 
-                    @XmlElement(required = true)
+                  @XmlElement(required = true)
                     protected String name;
 
                     /**
-                     * Gets the value of the name property.
+                     * Ruft den Wert der name-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -1010,7 +1042,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the name property.
+                     * Legt den Wert der name-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -1027,9 +1059,9 @@ public class Organisation {
 
 
             /**
-             * <p>Java class for anonymous complex type.
+             * <p>Java-Klasse für anonymous complex type.
              * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
+             * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
              * 
              * <pre>
              * &lt;complexType>
@@ -1050,8 +1082,13 @@ public class Organisation {
                 "resource"
             })
             public static class Resources {
+              @Override public String toString() {
+                return "Resources{" +
+                  "resource=" + resource +
+                  '}';
+              }
 
-                protected List<String> resource;
+              protected List<String> resource;
 
                 /**
                  * Gets the value of the resource property.
@@ -1086,9 +1123,9 @@ public class Organisation {
 
 
             /**
-             * <p>Java class for anonymous complex type.
+             * <p>Java-Klasse für anonymous complex type.
              * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
+             * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
              * 
              * <pre>
              * &lt;complexType>
@@ -1254,8 +1291,16 @@ public class Organisation {
                 "deleg"
             })
             public static class Tasks {
+              @Override public String toString() {
+                return "Tasks{" +
+                  "exec=" + exec +
+                  ", split=" + split +
+                  ", refine=" + refine +
+                  ", deleg=" + deleg +
+                  '}';
+              }
 
-                protected List<Organisation.Opas.Opa.Tasks.Exec> exec;
+              protected List<Organisation.Opas.Opa.Tasks.Exec> exec;
                 protected List<Organisation.Opas.Opa.Tasks.Split> split;
                 protected List<Organisation.Opas.Opa.Tasks.Refine> refine;
                 protected List<Organisation.Opas.Opa.Tasks.Deleg> deleg;
@@ -1378,9 +1423,9 @@ public class Organisation {
 
 
                 /**
-                 * <p>Java class for anonymous complex type.
+                 * <p>Java-Klasse für anonymous complex type.
                  * 
-                 * <p>The following schema fragment specifies the expected content contained within this class.
+                 * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                  * 
                  * <pre>
                  * &lt;complexType>
@@ -1414,14 +1459,20 @@ public class Organisation {
                     "to"
                 })
                 public static class Deleg {
+                  @Override public String toString() {
+                    return "Deleg{" +
+                      "input=" + input +
+                      ", to='" + to + '\'' +
+                      '}';
+                  }
 
-                    @XmlElement(required = true)
+                  @XmlElement(required = true)
                     protected Organisation.Opas.Opa.Tasks.Deleg.Input input;
                     @XmlElement(required = true)
                     protected String to;
 
                     /**
-                     * Gets the value of the input property.
+                     * Ruft den Wert der input-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -1433,7 +1484,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the input property.
+                     * Legt den Wert der input-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -1445,7 +1496,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Gets the value of the to property.
+                     * Ruft den Wert der to-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -1457,7 +1508,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the to property.
+                     * Legt den Wert der to-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -1470,9 +1521,9 @@ public class Organisation {
 
 
                     /**
-                     * <p>Java class for anonymous complex type.
+                     * <p>Java-Klasse für anonymous complex type.
                      * 
-                     * <p>The following schema fragment specifies the expected content contained within this class.
+                     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                      * 
                      * <pre>
                      * &lt;complexType>
@@ -1495,14 +1546,20 @@ public class Organisation {
                         "role"
                     })
                     public static class Input {
+                      @Override public String toString() {
+                        return "Input{" +
+                          "protocol='" + protocol + '\'' +
+                          ", role='" + role + '\'' +
+                          '}';
+                      }
 
-                        @XmlElement(required = true)
+                      @XmlElement(required = true)
                         protected String protocol;
                         @XmlElement(required = true)
                         protected String role;
 
                         /**
-                         * Gets the value of the protocol property.
+                         * Ruft den Wert der protocol-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1514,7 +1571,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the protocol property.
+                         * Legt den Wert der protocol-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1526,7 +1583,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Gets the value of the role property.
+                         * Ruft den Wert der role-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1538,7 +1595,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the role property.
+                         * Legt den Wert der role-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1555,9 +1612,9 @@ public class Organisation {
 
 
                 /**
-                 * <p>Java class for anonymous complex type.
+                 * <p>Java-Klasse für anonymous complex type.
                  * 
-                 * <p>The following schema fragment specifies the expected content contained within this class.
+                 * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                  * 
                  * <pre>
                  * &lt;complexType>
@@ -1593,8 +1650,14 @@ public class Organisation {
                     @XmlElement(required = true)
                     protected Organisation.Opas.Opa.Tasks.Exec.Input input;
 
-                    /**
-                     * Gets the value of the input property.
+                  @Override public String toString() {
+                    return "Exec{" +
+                      "input=" + input +
+                      '}';
+                  }
+
+                  /**
+                     * Ruft den Wert der input-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -1606,7 +1669,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the input property.
+                     * Legt den Wert der input-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -1619,9 +1682,9 @@ public class Organisation {
 
 
                     /**
-                     * <p>Java class for anonymous complex type.
+                     * <p>Java-Klasse für anonymous complex type.
                      * 
-                     * <p>The following schema fragment specifies the expected content contained within this class.
+                     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                      * 
                      * <pre>
                      * &lt;complexType>
@@ -1644,14 +1707,20 @@ public class Organisation {
                         "role"
                     })
                     public static class Input {
+                      @Override public String toString() {
+                        return "Input{" +
+                          "protocol='" + protocol + '\'' +
+                          ", role='" + role + '\'' +
+                          '}';
+                      }
 
-                        @XmlElement(required = true)
+                      @XmlElement(required = true)
                         protected String protocol;
                         @XmlElement(required = true)
                         protected String role;
 
                         /**
-                         * Gets the value of the protocol property.
+                         * Ruft den Wert der protocol-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1663,7 +1732,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the protocol property.
+                         * Legt den Wert der protocol-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1675,7 +1744,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Gets the value of the role property.
+                         * Ruft den Wert der role-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1687,7 +1756,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the role property.
+                         * Legt den Wert der role-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1704,9 +1773,9 @@ public class Organisation {
 
 
                 /**
-                 * <p>Java class for anonymous complex type.
+                 * <p>Java-Klasse für anonymous complex type.
                  * 
-                 * <p>The following schema fragment specifies the expected content contained within this class.
+                 * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                  * 
                  * <pre>
                  * &lt;complexType>
@@ -1762,13 +1831,22 @@ public class Organisation {
                 })
                 public static class Refine {
 
+
                     @XmlElement(required = true)
                     protected Organisation.Opas.Opa.Tasks.Refine.Input input;
                     @XmlElement(required = true)
                     protected Organisation.Opas.Opa.Tasks.Refine.Output output;
 
-                    /**
-                     * Gets the value of the input property.
+
+                  @Override public String toString() {
+                    return "Refine{" +
+                      "input=" + input +
+                      ", output=" + output +
+                      '}';
+                  }
+
+                  /**
+                     * Ruft den Wert der input-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -1780,7 +1858,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the input property.
+                     * Legt den Wert der input-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -1792,7 +1870,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Gets the value of the output property.
+                     * Ruft den Wert der output-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -1804,7 +1882,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the output property.
+                     * Legt den Wert der output-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -1817,9 +1895,9 @@ public class Organisation {
 
 
                     /**
-                     * <p>Java class for anonymous complex type.
+                     * <p>Java-Klasse für anonymous complex type.
                      * 
-                     * <p>The following schema fragment specifies the expected content contained within this class.
+                     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                      * 
                      * <pre>
                      * &lt;complexType>
@@ -1848,8 +1926,15 @@ public class Organisation {
                         @XmlElement(required = true)
                         protected String role;
 
-                        /**
-                         * Gets the value of the protocol property.
+                      @Override public String toString() {
+                        return "Input{" +
+                          "protocol='" + protocol + '\'' +
+                          ", role='" + role + '\'' +
+                          '}';
+                      }
+
+                      /**
+                         * Ruft den Wert der protocol-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1861,7 +1946,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the protocol property.
+                         * Legt den Wert der protocol-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1873,7 +1958,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Gets the value of the role property.
+                         * Ruft den Wert der role-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1885,7 +1970,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the role property.
+                         * Legt den Wert der role-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1900,9 +1985,9 @@ public class Organisation {
 
 
                     /**
-                     * <p>Java class for anonymous complex type.
+                     * <p>Java-Klasse für anonymous complex type.
                      * 
-                     * <p>The following schema fragment specifies the expected content contained within this class.
+                     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                      * 
                      * <pre>
                      * &lt;complexType>
@@ -1935,14 +2020,20 @@ public class Organisation {
                         "roles"
                     })
                     public static class Output {
+                      @Override public String toString() {
+                        return "Output{" +
+                          "protocol='" + protocol + '\'' +
+                          ", roles=" + roles +
+                          '}';
+                      }
 
-                        @XmlElement(required = true)
+                      @XmlElement(required = true)
                         protected String protocol;
                         @XmlElement(required = true)
                         protected Organisation.Opas.Opa.Tasks.Refine.Output.Roles roles;
 
                         /**
-                         * Gets the value of the protocol property.
+                         * Ruft den Wert der protocol-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1954,7 +2045,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the protocol property.
+                         * Legt den Wert der protocol-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1966,7 +2057,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Gets the value of the roles property.
+                         * Ruft den Wert der roles-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -1978,7 +2069,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the roles property.
+                         * Legt den Wert der roles-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -1991,9 +2082,9 @@ public class Organisation {
 
 
                         /**
-                         * <p>Java class for anonymous complex type.
+                         * <p>Java-Klasse für anonymous complex type.
                          * 
-                         * <p>The following schema fragment specifies the expected content contained within this class.
+                         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                          * 
                          * <pre>
                          * &lt;complexType>
@@ -2014,8 +2105,13 @@ public class Organisation {
                             "role"
                         })
                         public static class Roles {
+                          @Override public String toString() {
+                            return "Roles{" +
+                              "role=" + role +
+                              '}';
+                          }
 
-                            @XmlElement(required = true)
+                          @XmlElement(required = true)
                             protected List<String> role;
 
                             /**
@@ -2055,9 +2151,9 @@ public class Organisation {
 
 
                 /**
-                 * <p>Java class for anonymous complex type.
+                 * <p>Java-Klasse für anonymous complex type.
                  * 
-                 * <p>The following schema fragment specifies the expected content contained within this class.
+                 * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                  * 
                  * <pre>
                  * &lt;complexType>
@@ -2122,14 +2218,20 @@ public class Organisation {
                     "outputs"
                 })
                 public static class Split {
+                  @Override public String toString() {
+                    return "Split{" +
+                      "input=" + input +
+                      ", outputs=" + outputs +
+                      '}';
+                  }
 
-                    @XmlElement(required = true)
+                  @XmlElement(required = true)
                     protected Organisation.Opas.Opa.Tasks.Split.Input input;
                     @XmlElement(required = true)
                     protected Organisation.Opas.Opa.Tasks.Split.Outputs outputs;
 
                     /**
-                     * Gets the value of the input property.
+                     * Ruft den Wert der input-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -2141,7 +2243,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the input property.
+                     * Legt den Wert der input-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -2153,7 +2255,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Gets the value of the outputs property.
+                     * Ruft den Wert der outputs-Eigenschaft ab.
                      * 
                      * @return
                      *     possible object is
@@ -2165,7 +2267,7 @@ public class Organisation {
                     }
 
                     /**
-                     * Sets the value of the outputs property.
+                     * Legt den Wert der outputs-Eigenschaft fest.
                      * 
                      * @param value
                      *     allowed object is
@@ -2178,9 +2280,9 @@ public class Organisation {
 
 
                     /**
-                     * <p>Java class for anonymous complex type.
+                     * <p>Java-Klasse für anonymous complex type.
                      * 
-                     * <p>The following schema fragment specifies the expected content contained within this class.
+                     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                      * 
                      * <pre>
                      * &lt;complexType>
@@ -2213,14 +2315,20 @@ public class Organisation {
                         "roles"
                     })
                     public static class Input {
+                      @Override public String toString() {
+                        return "Input{" +
+                          "protocol='" + protocol + '\'' +
+                          ", roles=" + roles +
+                          '}';
+                      }
 
-                        @XmlElement(required = true)
+                      @XmlElement(required = true)
                         protected String protocol;
                         @XmlElement(required = true)
                         protected Organisation.Opas.Opa.Tasks.Split.Input.Roles roles;
 
                         /**
-                         * Gets the value of the protocol property.
+                         * Ruft den Wert der protocol-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -2232,7 +2340,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the protocol property.
+                         * Legt den Wert der protocol-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -2244,7 +2352,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Gets the value of the roles property.
+                         * Ruft den Wert der roles-Eigenschaft ab.
                          * 
                          * @return
                          *     possible object is
@@ -2256,7 +2364,7 @@ public class Organisation {
                         }
 
                         /**
-                         * Sets the value of the roles property.
+                         * Legt den Wert der roles-Eigenschaft fest.
                          * 
                          * @param value
                          *     allowed object is
@@ -2269,9 +2377,9 @@ public class Organisation {
 
 
                         /**
-                         * <p>Java class for anonymous complex type.
+                         * <p>Java-Klasse für anonymous complex type.
                          * 
-                         * <p>The following schema fragment specifies the expected content contained within this class.
+                         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                          * 
                          * <pre>
                          * &lt;complexType>
@@ -2292,8 +2400,13 @@ public class Organisation {
                             "role"
                         })
                         public static class Roles {
+                          @Override public String toString() {
+                            return "Roles{" +
+                              "role=" + role +
+                              '}';
+                          }
 
-                            @XmlElement(required = true)
+                          @XmlElement(required = true)
                             protected List<String> role;
 
                             /**
@@ -2331,9 +2444,9 @@ public class Organisation {
 
 
                     /**
-                     * <p>Java class for anonymous complex type.
+                     * <p>Java-Klasse für anonymous complex type.
                      * 
-                     * <p>The following schema fragment specifies the expected content contained within this class.
+                     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                      * 
                      * <pre>
                      * &lt;complexType>
@@ -2400,9 +2513,9 @@ public class Organisation {
 
 
                         /**
-                         * <p>Java class for anonymous complex type.
+                         * <p>Java-Klasse für anonymous complex type.
                          * 
-                         * <p>The following schema fragment specifies the expected content contained within this class.
+                         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
                          * 
                          * <pre>
                          * &lt;complexType>
@@ -2432,7 +2545,7 @@ public class Organisation {
                             protected String role;
 
                             /**
-                             * Gets the value of the protocol property.
+                             * Ruft den Wert der protocol-Eigenschaft ab.
                              * 
                              * @return
                              *     possible object is
@@ -2444,7 +2557,7 @@ public class Organisation {
                             }
 
                             /**
-                             * Sets the value of the protocol property.
+                             * Legt den Wert der protocol-Eigenschaft fest.
                              * 
                              * @param value
                              *     allowed object is
@@ -2456,7 +2569,7 @@ public class Organisation {
                             }
 
                             /**
-                             * Gets the value of the role property.
+                             * Ruft den Wert der role-Eigenschaft ab.
                              * 
                              * @return
                              *     possible object is
@@ -2468,7 +2581,7 @@ public class Organisation {
                             }
 
                             /**
-                             * Sets the value of the role property.
+                             * Legt den Wert der role-Eigenschaft fest.
                              * 
                              * @param value
                              *     allowed object is
@@ -2493,9 +2606,9 @@ public class Organisation {
 
 
     /**
-     * <p>Java class for anonymous complex type.
+     * <p>Java-Klasse für anonymous complex type.
      * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
+     * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
      * 
      * <pre>
      * &lt;complexType>
@@ -2573,9 +2686,9 @@ public class Organisation {
 
 
         /**
-         * <p>Java class for anonymous complex type.
+         * <p>Java-Klasse für anonymous complex type.
          * 
-         * <p>The following schema fragment specifies the expected content contained within this class.
+         * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
          * 
          * <pre>
          * &lt;complexType>
@@ -2619,7 +2732,7 @@ public class Organisation {
             protected List<String> file;
 
             /**
-             * Gets the value of the name property.
+             * Ruft den Wert der name-Eigenschaft ab.
              * 
              * @return
              *     possible object is
@@ -2631,7 +2744,7 @@ public class Organisation {
             }
 
             /**
-             * Sets the value of the name property.
+             * Legt den Wert der name-Eigenschaft fest.
              * 
              * @param value
              *     allowed object is
@@ -2643,7 +2756,7 @@ public class Organisation {
             }
 
             /**
-             * Gets the value of the roles property.
+             * Ruft den Wert der roles-Eigenschaft ab.
              * 
              * @return
              *     possible object is
@@ -2655,7 +2768,7 @@ public class Organisation {
             }
 
             /**
-             * Sets the value of the roles property.
+             * Legt den Wert der roles-Eigenschaft fest.
              * 
              * @param value
              *     allowed object is
@@ -2697,9 +2810,9 @@ public class Organisation {
 
 
             /**
-             * <p>Java class for anonymous complex type.
+             * <p>Java-Klasse für anonymous complex type.
              * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
+             * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
              * 
              * <pre>
              * &lt;complexType>

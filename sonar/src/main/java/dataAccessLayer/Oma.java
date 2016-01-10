@@ -14,7 +14,7 @@ public class Oma implements IOma{
 	@Override
 	public void setTask(IProtocol p) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class Oma implements IOma{
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
