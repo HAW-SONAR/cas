@@ -1,11 +1,18 @@
 package dataAccessLayer;
 
+import java.util.List;
+
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
  */
-public class Opa implements IOpa{
+public class Opa implements IOpa {
 
   private Oma oma;
+  private String name;
+  private List<ITask> tasks;
+  private List<IResource> resources;
+  private List<ICommunicationProtocol> communicationProtocols;
+
 
   public Opa() {
     oma = null;
@@ -23,69 +30,58 @@ public class Opa implements IOpa{
     oma = null;
   }
 
-@Override
-public double getOffer(IProtocol p) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+  @Override public double getOffer(IProtocol p) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-@Override
-public void setTask(IProtocol p) {
-	// TODO Auto-generated method stub
-	
-}
+  @Override public void setTask(IProtocol p) {
+    // TODO Auto-generated method stub
 
-@Override
-public String getName() {
-	// TODO Auto-generated method stub
-	return null;
-}
+  }
 
-@Override
-public void start() {
-	// TODO Auto-generated method stub
-	
-}
+  @Override public String getName() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-@Override
-public IPlan computeGlobalPlan() {
-	// TODO Auto-generated method stub
-	return null;
-}
+  @Override public void start() {
+    // TODO Auto-generated method stub
 
-@Override
-public int getLevel() {
-	// TODO Auto-generated method stub
-	return 0;
-}
+  }
 
-@Override
-public IPlan exec(IProtocol p) {
-	// TODO Auto-generated method stub
-	return null;
-}
+  @Override public IPlan computeGlobalPlan() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-@Override
-public boolean deleg(IProtocol p) {
-	// TODO Auto-generated method stub
-	return false;
-}
+  @Override public int getLevel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-@Override
-public boolean split(IProtocol p) {
-	// TODO Auto-generated method stub
-	return false;
-}
+  @Override public IPlan exec(IProtocol p) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-@Override
-public boolean refine(IProtocol p) {
-	// TODO Auto-generated method stub
-	return false;
-}
+  @Override public boolean deleg(IProtocol p) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 
-@Override
-public boolean isReady() {
-	// TODO Auto-generated method stub
-	return false;
-}
+  @Override public boolean split(IProtocol p) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override public boolean refine(IProtocol p) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override public boolean isReady() {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }

@@ -2368,7 +2368,7 @@ public class Organisation {
                          * 
                          * @param value
                          *     allowed object is
-                         *     {@link Organisation.Opas.Opa.Tasks.Split.Input.Roles }
+                         *     {@link Organisation.Opas.Opa. s.Split.Input.Roles }
                          *     
                          */
                         public void setRoles(Organisation.Opas.Opa.Tasks.Split.Input.Roles value) {

@@ -8,8 +8,8 @@ import java.util.List;
  *
  */
 public interface IProtocol {
-	
-	public List<IRole> getRoles();
+
+	public List<String> getRoles();
 	
 	public List<Operation> getApplicableOperations();
 	

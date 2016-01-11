@@ -19,5 +19,4 @@ public interface IOpa extends IAgent {
 	public boolean refine(IProtocol p);
 	
 	public boolean isReady();
-	
 }
