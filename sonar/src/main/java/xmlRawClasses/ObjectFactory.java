@@ -1,13 +1,23 @@
+//
+// Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.8-b130911.1802 generiert 
+// Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
+// Generiert: 2016.01.11 um 10:57:03 PM CET 
+//
+
 
 package xmlRawClasses;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
+import javax.xml.namespace.QName;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the xmlRawClasses package. 
+ * generated in the gv2 package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -21,12 +31,71 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Output_QNAME = new QName("", "output");
+    private final static QName _Opa_QNAME = new QName("", "opa");
+    private final static QName _Input_QNAME = new QName("", "input");
+    private final static QName _Protocol_QNAME = new QName("", "protocol");
+    private final static QName _Role_QNAME = new QName("", "role");
+    private final static QName _Task_QNAME = new QName("", "task");
+    private final static QName _Split_QNAME = new QName("", "split");
+    private final static QName _Organisation_QNAME = new QName("", "organisation");
+    private final static QName _Refine_QNAME = new QName("", "refine");
+    private final static QName _Deleg_QNAME = new QName("", "deleg");
+    private final static QName _Exec_QNAME = new QName("", "exec");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: xmlRawClasses
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: gv2
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link Output }
+     * 
+     */
+    public Output createOutput() {
+        return new Output();
+    }
+
+    /**
+     * Create an instance of {@link Opa }
+     * 
+     */
+    public Opa createOpa() {
+        return new Opa();
+    }
+
+    /**
+     * Create an instance of {@link Input }
+     * 
+     */
+    public Input createInput() {
+        return new Input();
+    }
+
+    /**
+     * Create an instance of {@link Protocol }
+     * 
+     */
+    public Protocol createProtocol() {
+        return new Protocol();
+    }
+
+    /**
+     * Create an instance of {@link Task }
+     * 
+     */
+    public Task createTask() {
+        return new Task();
+    }
+
+    /**
+     * Create an instance of {@link Split }
+     * 
+     */
+    public Split createSplit() {
+        return new Split();
     }
 
     /**
@@ -38,179 +107,126 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas }
+     * Create an instance of {@link Refine }
      * 
      */
-    public Organisation.Opas createOrganisationOpas() {
-        return new Organisation.Opas();
+    public Refine createRefine() {
+        return new Refine();
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa }
+     * Create an instance of {@link Deleg }
      * 
      */
-    public Organisation.Opas.Opa createOrganisationOpasOpa() {
-        return new Organisation.Opas.Opa();
+    public Deleg createDeleg() {
+        return new Deleg();
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.CommunicationProtocols }
+     * Create an instance of {@link Exec }
      * 
      */
-    public Organisation.Opas.Opa.CommunicationProtocols createOrganisationOpasOpaCommunicationProtocols() {
-        return new Organisation.Opas.Opa.CommunicationProtocols();
+    public Exec createExec() {
+        return new Exec();
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Output }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks createOrganisationOpasOpaTasks() {
-        return new Organisation.Opas.Opa.Tasks();
+    @XmlElementDecl(namespace = "", name = "output")
+    public JAXBElement<Output> createOutput(Output value) {
+        return new JAXBElement<Output>(_Output_QNAME, Output.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Deleg }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Opa }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Deleg createOrganisationOpasOpaTasksDeleg() {
-        return new Organisation.Opas.Opa.Tasks.Deleg();
+    @XmlElementDecl(namespace = "", name = "opa")
+    public JAXBElement<Opa> createOpa(Opa value) {
+        return new JAXBElement<Opa>(_Opa_QNAME, Opa.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Refine }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Input }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Refine createOrganisationOpasOpaTasksRefine() {
-        return new Organisation.Opas.Opa.Tasks.Refine();
+    @XmlElementDecl(namespace = "", name = "input")
+    public JAXBElement<Input> createInput(Input value) {
+        return new JAXBElement<Input>(_Input_QNAME, Input.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Refine.Output }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Protocol }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Refine.Output createOrganisationOpasOpaTasksRefineOutput() {
-        return new Organisation.Opas.Opa.Tasks.Refine.Output();
+    @XmlElementDecl(namespace = "", name = "protocol")
+    public JAXBElement<Protocol> createProtocol(Protocol value) {
+        return new JAXBElement<Protocol>(_Protocol_QNAME, Protocol.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Split }
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Split createOrganisationOpasOpaTasksSplit() {
-        return new Organisation.Opas.Opa.Tasks.Split();
+    @XmlElementDecl(namespace = "", name = "role")
+    public JAXBElement<String> createRole(String value) {
+        return new JAXBElement<String>(_Role_QNAME, String.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Split.Outputs }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Task }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Split.Outputs createOrganisationOpasOpaTasksSplitOutputs() {
-        return new Organisation.Opas.Opa.Tasks.Split.Outputs();
+    @XmlElementDecl(namespace = "", name = "task")
+    public JAXBElement<Task> createTask(Task value) {
+        return new JAXBElement<Task>(_Task_QNAME, Task.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Split.Input }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Split }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Split.Input createOrganisationOpasOpaTasksSplitInput() {
-        return new Organisation.Opas.Opa.Tasks.Split.Input();
+    @XmlElementDecl(namespace = "", name = "split")
+    public JAXBElement<Split> createSplit(Split value) {
+        return new JAXBElement<Split>(_Split_QNAME, Split.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Exec }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Organisation }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Tasks.Exec createOrganisationOpasOpaTasksExec() {
-        return new Organisation.Opas.Opa.Tasks.Exec();
+    @XmlElementDecl(namespace = "", name = "organisation")
+    public JAXBElement<Organisation> createOrganisation(Organisation value) {
+        return new JAXBElement<Organisation>(_Organisation_QNAME, Organisation.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Protocols }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Refine }{@code >}}
      * 
      */
-    public Organisation.Protocols createOrganisationProtocols() {
-        return new Organisation.Protocols();
+    @XmlElementDecl(namespace = "", name = "refine")
+    public JAXBElement<Refine> createRefine(Refine value) {
+        return new JAXBElement<Refine>(_Refine_QNAME, Refine.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Protocols.Protocol }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Deleg }{@code >}}
      * 
      */
-    public Organisation.Protocols.Protocol createOrganisationProtocolsProtocol() {
-        return new Organisation.Protocols.Protocol();
+    @XmlElementDecl(namespace = "", name = "deleg")
+    public JAXBElement<Deleg> createDeleg(Deleg value) {
+        return new JAXBElement<Deleg>(_Deleg_QNAME, Deleg.class, null, value);
     }
 
     /**
-     * Create an instance of {@link Organisation.Opas.Opa.Resources }
+     * Create an instance of {@link JAXBElement }{@code <}{@link Exec }{@code >}}
      * 
      */
-    public Organisation.Opas.Opa.Resources createOrganisationOpasOpaResources() {
-        return new Organisation.Opas.Opa.Resources();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.CommunicationProtocols.CommunicationProtocol }
-     * 
-     */
-    public Organisation.Opas.Opa.CommunicationProtocols.CommunicationProtocol createOrganisationOpasOpaCommunicationProtocolsCommunicationProtocol() {
-        return new Organisation.Opas.Opa.CommunicationProtocols.CommunicationProtocol();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Deleg.Input }
-     * 
-     */
-    public Organisation.Opas.Opa.Tasks.Deleg.Input createOrganisationOpasOpaTasksDelegInput() {
-        return new Organisation.Opas.Opa.Tasks.Deleg.Input();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Refine.Input }
-     * 
-     */
-    public Organisation.Opas.Opa.Tasks.Refine.Input createOrganisationOpasOpaTasksRefineInput() {
-        return new Organisation.Opas.Opa.Tasks.Refine.Input();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Refine.Output.Roles }
-     * 
-     */
-    public Organisation.Opas.Opa.Tasks.Refine.Output.Roles createOrganisationOpasOpaTasksRefineOutputRoles() {
-        return new Organisation.Opas.Opa.Tasks.Refine.Output.Roles();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Split.Outputs.Output }
-     * 
-     */
-    public Organisation.Opas.Opa.Tasks.Split.Outputs.Output createOrganisationOpasOpaTasksSplitOutputsOutput() {
-        return new Organisation.Opas.Opa.Tasks.Split.Outputs.Output();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Split.Input.Roles }
-     * 
-     */
-    public Organisation.Opas.Opa.Tasks.Split.Input.Roles createOrganisationOpasOpaTasksSplitInputRoles() {
-        return new Organisation.Opas.Opa.Tasks.Split.Input.Roles();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Opas.Opa.Tasks.Exec.Input }
-     * 
-     */
-    public Organisation.Opas.Opa.Tasks.Exec.Input createOrganisationOpasOpaTasksExecInput() {
-        return new Organisation.Opas.Opa.Tasks.Exec.Input();
-    }
-
-    /**
-     * Create an instance of {@link Organisation.Protocols.Protocol.Roles }
-     * 
-     */
-    public Organisation.Protocols.Protocol.Roles createOrganisationProtocolsProtocolRoles() {
-        return new Organisation.Protocols.Protocol.Roles();
+    @XmlElementDecl(namespace = "", name = "exec")
+    public JAXBElement<Exec> createExec(Exec value) {
+        return new JAXBElement<Exec>(_Exec_QNAME, Exec.class, null, value);
     }
 
 }
