@@ -17,17 +17,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java-Klasse für Organisation complex type.
+ * <p>Java-Klasse für Split complex type.
  * 
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
- * &lt;complexType name="Organisation">
+ * &lt;complexType name="Split">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}protocol" maxOccurs="unbounded"/>
- *         &lt;element ref="{}opa" maxOccurs="unbounded"/>
+ *         &lt;element ref="{}input"/>
+ *         &lt;element ref="{}output" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,73 +37,68 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Organisation", propOrder = {
-    "protocol",
-    "opa"
+@XmlType(name = "Split", propOrder = {
+    "input",
+    "output"
 })
-public class Organisation {
+public class Split {
 
     @XmlElement(required = true)
-    protected List<Protocol> protocol;
+    protected Input input;
     @XmlElement(required = true)
-    protected List<Opa> opa;
+    protected List<Output> output;
 
     /**
-     * Gets the value of the protocol property.
+     * Ruft den Wert der input-Eigenschaft ab.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the protocol property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getProtocol().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Protocol }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link Input }
+     *     
      */
-    public List<Protocol> getProtocol() {
-        if (protocol == null) {
-            protocol = new ArrayList<Protocol>();
-        }
-      return protocol;
+    public Input getInput() {
+        return input;
     }
 
     /**
-     * Gets the value of the opa property.
+     * Legt den Wert der input-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Input }
+     *     
+     */
+    public void setInput(Input value) {
+        this.input = value;
+    }
+
+    /**
+     * Gets the value of the output property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the opa property.
+     * This is why there is not a <CODE>set</CODE> method for the output property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getOpa().add(newItem);
+     *    getOutput().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Opa }
+     * {@link Output }
      * 
      * 
      */
-    public List<Opa> getOpa() {
-        if (opa == null) {
-            opa = new ArrayList<Opa>();
+    public List<Output> getOutput() {
+        if (output == null) {
+            output = new ArrayList<Output>();
         }
-        return this.opa;
+        return this.output;
     }
 
 }
