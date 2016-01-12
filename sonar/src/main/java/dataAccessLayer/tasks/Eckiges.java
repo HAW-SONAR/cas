@@ -5,15 +5,14 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 12.01.2016.
  */
-//TODO rename to Round thing
-public class Rundes implements IRundes {
+public class Eckiges implements IEckiges {
 
   private Operation type;
   //TODO delete list make single
-  private List<InputTask> input;
-  private List<OutputTask> output;
+  private List<InputRound> input;
+  private List<OutputRound> output;
 
-  public Rundes(Operation type, List<InputTask> input, List<OutputTask> output) {
+  public Eckiges(Operation type, List<InputRound> input, List<OutputRound> output) {
     this.type = type;
     this.input = input;
     this.output = output;
@@ -27,24 +26,24 @@ public class Rundes implements IRundes {
     this.type = type;
   }
 
-  public List<InputTask> getInput() {
+  public List<InputRound> getInput() {
     return input;
   }
 
-  public void setInput(List<InputTask> input) {
+  public void setInput(List<InputRound> input) {
     this.input = input;
   }
 
-  public List<OutputTask> getOutput() {
+  public List<OutputRound> getOutput() {
     return output;
   }
 
-  public void setOutput(List<OutputTask> output) {
+  public void setOutput(List<OutputRound> output) {
     this.output = output;
   }
 
   @Override public String toString() {
-    return "Rundes{" +
+    return "Eckiges{" +
         "type=" + type +
         ", input=" + input +
         ", output=" + output +
@@ -54,16 +53,16 @@ public class Rundes implements IRundes {
   @Override public boolean equals(Object o) {
     if (this == o)
       return true;
-    if (!(o instanceof Rundes))
+    if (!(o instanceof Eckiges))
       return false;
 
-    Rundes rundes = (Rundes) o;
+    Eckiges eckiges = (Eckiges) o;
 
-    if (type != rundes.type)
+    if (type != eckiges.type)
       return false;
-    if (input != null ? !input.equals(rundes.input) : rundes.input != null)
+    if (input != null ? !input.equals(eckiges.input) : eckiges.input != null)
       return false;
-    return !(output != null ? !output.equals(rundes.output) : rundes.output != null);
+    return !(output != null ? !output.equals(eckiges.output) : eckiges.output != null);
 
   }
 

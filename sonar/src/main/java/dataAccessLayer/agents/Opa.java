@@ -2,7 +2,7 @@ package dataAccessLayer.agents;
 
 import dataAccessLayer.IPlan;
 import dataAccessLayer.IProtocol;
-import dataAccessLayer.tasks.IRundes;
+import dataAccessLayer.tasks.IEckiges;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ public class Opa implements IOpa {
 
   private Oma oma;
   private String name;
-  private List<IRundes> tasks;
+  private List<IEckiges> tasks;
   private List<String> resources;
   private List<String> communicationProtocols;
 
-  public Opa(Oma oma, String name, List<IRundes> tasks, List<String> resources,
+  public Opa(Oma oma, String name, List<IEckiges> tasks, List<String> resources,
       List<String> communicationProtocols) {
     this.oma = oma;
     this.name = name;
@@ -96,11 +96,11 @@ public class Opa implements IOpa {
     this.name = name;
   }
 
-  public List<IRundes> getTasks() {
+  public List<IEckiges> getTasks() {
     return tasks;
   }
 
-  public void setTasks(List<IRundes> tasks) {
+  public void setTasks(List<IEckiges> tasks) {
     this.tasks = tasks;
   }
 

@@ -6,14 +6,15 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 12.01.2016.
  */
-public class InputTask {
+public class OutputRound {
 
   protected String protocol;
-  protected List<String> roles;
+  protected List<String> role;
+  private String opa;
 
-  public InputTask(String protocol, List<String> role) {
+  public OutputRound(String protocol, List<String> role) {
     this.protocol = protocol;
-    this.roles = role;
+    this.role = role;
   }
 
   public String getProtocol() {
@@ -24,37 +25,37 @@ public class InputTask {
     this.protocol = value;
   }
 
-  public List<String> getRoles() {
-    if (roles == null) {
-      roles = new ArrayList<String>();
+  public List<String> getRole() {
+    if (role == null) {
+      role = new ArrayList<String>();
     }
-    return this.roles;
+    return this.role;
   }
 
   @Override public String toString() {
-    return "InputTask{" +
+    return "OutputRound{" +
         "protocol='" + protocol + '\'' +
-        ", roles=" + roles +
+        ", roles=" + role +
         '}';
   }
 
   @Override public boolean equals(Object o) {
     if (this == o)
       return true;
-    if (!(o instanceof InputTask))
+    if (!(o instanceof OutputRound))
       return false;
 
-    InputTask that = (InputTask) o;
+    OutputRound that = (OutputRound) o;
 
     if (protocol != null ? !protocol.equals(that.protocol) : that.protocol != null)
       return false;
-    return !(roles != null ? !roles.equals(that.roles) : that.roles != null);
+    return !(role != null ? !role.equals(that.role) : that.role != null);
 
   }
 
   @Override public int hashCode() {
     int result = protocol != null ? protocol.hashCode() : 0;
-    result = 31 * result + (roles != null ? roles.hashCode() : 0);
+    result = 31 * result + (role != null ? role.hashCode() : 0);
     return result;
   }
 }

@@ -5,11 +5,11 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 12.01.2016.
  */
-public interface IRundes {
+public interface IEckiges {
 
   public Operation getType();
 
-  public List<InputTask> getInput();
+  public List<InputRound> getInput();
 
-  public List<OutputTask> getOutput();
+  public List<OutputRound> getOutput();
 }

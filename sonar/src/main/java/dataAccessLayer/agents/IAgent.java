@@ -12,7 +12,7 @@ public interface IAgent {
 	public double getOffer(IProtocol p);
 	
 	/**
-	 * Sets the initial Rundes for the first OPA
+	 * Sets the initial Eckiges for the first OPA
 	 * @param p
 	 */
 	public void setTask(IProtocol p);
