@@ -1,5 +1,8 @@
 package dataAccessLayer;
 
+import dataAccessLayer.agents.IOma;
+import dataAccessLayer.agents.IOpa;
+
 import java.util.List;
 
 public interface IOrganisation {

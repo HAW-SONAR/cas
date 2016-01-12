@@ -1,4 +1,4 @@
-package dataAccessLayer;
+package dataAccessLayer.tasks;
 
 public enum Operation {
 	

@@ -1,4 +1,7 @@
-package dataAccessLayer;
+package dataAccessLayer.agents;
+
+import dataAccessLayer.IPlan;
+import dataAccessLayer.IProtocol;
 
 public interface IOpa extends IAgent {
 	

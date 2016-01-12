@@ -1,5 +1,8 @@
 package dataAccessLayer;
 
+import dataAccessLayer.agents.IOpa;
+import dataAccessLayer.tasks.Operation;
+
 import java.util.List;
 
 /**
@@ -9,12 +12,12 @@ public class Protocol implements IProtocol {
 
   private String name;
   private List<String> roles;
-  private List<String> files;
+  private String file;
 
-  public Protocol(String name, List<String> roles, List<String> files) {
+  public Protocol(String name, List<String> roles, String file) {
     this.name = name;
     this.roles = roles;
-    this.files = files;
+    this.file = file;
   }
 
   @Override public List<String> getRoles() {
@@ -45,19 +48,19 @@ public class Protocol implements IProtocol {
     this.roles = roles;
   }
 
-  public List<String> getFiles() {
-    return files;
+  public String getFile() {
+    return file;
   }
 
-  public void setFiles(List<String> files) {
-    this.files = files;
+  public void setFile(String file) {
+    this.file = file;
   }
 
   @Override public String toString() {
     return "Protocol{" +
         "name='" + name + '\'' +
         ", roles=" + roles +
-        ", files=" + files +
+        ", file=" + file +
         '}';
   }
 
@@ -74,14 +77,14 @@ public class Protocol implements IProtocol {
       return false;
     if (roles != null ? !roles.equals(protocol.roles) : protocol.roles != null)
       return false;
-    return !(files != null ? !files.equals(protocol.files) : protocol.files != null);
+    return !(file != null ? !file.equals(protocol.file) : protocol.file != null);
 
   }
 
   @Override public int hashCode() {
     int result = name != null ? name.hashCode() : 0;
     result = 31 * result + (roles != null ? roles.hashCode() : 0);
-    result = 31 * result + (files != null ? files.hashCode() : 0);
+    result = 31 * result + (file != null ? file.hashCode() : 0);
     return result;
   }
 }

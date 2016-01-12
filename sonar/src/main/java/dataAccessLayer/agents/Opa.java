@@ -1,4 +1,8 @@
-package dataAccessLayer;
+package dataAccessLayer.agents;
+
+import dataAccessLayer.IPlan;
+import dataAccessLayer.IProtocol;
+import dataAccessLayer.tasks.ITask;
 
 import java.util.List;
 
@@ -10,12 +14,16 @@ public class Opa implements IOpa {
   private Oma oma;
   private String name;
   private List<ITask> tasks;
-  private List<IResource> resources;
-  private List<ICommunicationProtocol> communicationProtocols;
+  private List<String> resources;
+  private List<String> communicationProtocols;
 
-
-  public Opa() {
-    oma = null;
+  public Opa(Oma oma, String name, List<ITask> tasks, List<String> resources,
+      List<String> communicationProtocols) {
+    this.oma = oma;
+    this.name = name;
+    this.tasks = tasks;
+    this.resources = resources;
+    this.communicationProtocols = communicationProtocols;
   }
 
   public Oma getOma() {

@@ -1,4 +1,7 @@
-package dataAccessLayer;
+package dataAccessLayer.agents;
+
+import dataAccessLayer.IPlan;
+import dataAccessLayer.IProtocol;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.

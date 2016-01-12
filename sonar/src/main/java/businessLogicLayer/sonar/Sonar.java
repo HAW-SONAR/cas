@@ -2,7 +2,7 @@ package businessLogicLayer.sonar;
 
 import java.util.List;
 
-import dataAccessLayer.IOpa;
+import dataAccessLayer.agents.IOpa;
 import dataAccessLayer.IOrganisation;
 import dataAccessLayer.IProtocol;
 

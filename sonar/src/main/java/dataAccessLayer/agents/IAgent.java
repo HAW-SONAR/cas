@@ -1,4 +1,6 @@
-package dataAccessLayer;
+package dataAccessLayer.agents;
+
+import dataAccessLayer.IProtocol;
 
 public interface IAgent {
 	

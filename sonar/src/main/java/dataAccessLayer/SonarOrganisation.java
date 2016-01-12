@@ -1,5 +1,8 @@
 package dataAccessLayer;
 
+import dataAccessLayer.agents.IOma;
+import dataAccessLayer.agents.IOpa;
+
 import java.util.List;
 
 /**
@@ -32,6 +35,14 @@ public class SonarOrganisation implements IOrganisation {
     } else {
       throw new IllegalStateException("Opa was not part of this SonarOrganisation");
     }
+  }
+
+  public void setAllOpas(List<IOpa> allOpas) {
+    this.allOpas = allOpas;
+  }
+
+  public void setProtocols(List<IProtocol> protocols) {
+    this.protocols = protocols;
   }
 
   @Override public List<IProtocol> getProtocols() {

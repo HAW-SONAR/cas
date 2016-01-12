@@ -100,5 +100,4 @@ public class Input {
         }
         return this.role;
     }
-
 }

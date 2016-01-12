@@ -1,5 +1,8 @@
 package dataAccessLayer;
 
+import dataAccessLayer.agents.IOpa;
+import dataAccessLayer.tasks.Operation;
+
 import java.util.List;
 
 /**
