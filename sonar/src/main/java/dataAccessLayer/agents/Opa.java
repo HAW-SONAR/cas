@@ -49,8 +49,7 @@ public class Opa implements IOpa {
   }
 
   @Override public String getName() {
-    // TODO Auto-generated method stub
-    return null;
+    return name;
   }
 
   @Override public void start() {
@@ -91,5 +90,74 @@ public class Opa implements IOpa {
   @Override public boolean isReady() {
     // TODO Auto-generated method stub
     return false;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public List<ITask> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(List<ITask> tasks) {
+    this.tasks = tasks;
+  }
+
+  public List<String> getResources() {
+    return resources;
+  }
+
+  public void setResources(List<String> resources) {
+    this.resources = resources;
+  }
+
+  public List<String> getCommunicationProtocols() {
+    return communicationProtocols;
+  }
+
+  public void setCommunicationProtocols(List<String> communicationProtocols) {
+    this.communicationProtocols = communicationProtocols;
+  }
+
+  @Override public String toString() {
+    return "Opa{" +
+        "oma=" + oma +
+        ", name='" + name + '\'' +
+        ", tasks=" + tasks +
+        ", resources=" + resources +
+        ", communicationProtocols=" + communicationProtocols +
+        '}';
+  }
+
+  @Override public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (!(o instanceof Opa))
+      return false;
+
+    Opa opa = (Opa) o;
+
+    if (oma != null ? !oma.equals(opa.oma) : opa.oma != null)
+      return false;
+    if (name != null ? !name.equals(opa.name) : opa.name != null)
+      return false;
+    if (tasks != null ? !tasks.equals(opa.tasks) : opa.tasks != null)
+      return false;
+    if (resources != null ? !resources.equals(opa.resources) : opa.resources != null)
+      return false;
+    return !(communicationProtocols != null ?
+        !communicationProtocols.equals(opa.communicationProtocols) :
+        opa.communicationProtocols != null);
+
+  }
+
+  @Override public int hashCode() {
+    int result = oma != null ? oma.hashCode() : 0;
+    result = 31 * result + (name != null ? name.hashCode() : 0);
+    result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
+    result = 31 * result + (resources != null ? resources.hashCode() : 0);
+    result = 31 * result + (communicationProtocols != null ? communicationProtocols.hashCode() : 0);
+    return result;
   }
 }

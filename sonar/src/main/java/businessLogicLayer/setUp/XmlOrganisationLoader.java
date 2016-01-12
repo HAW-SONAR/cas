@@ -27,6 +27,7 @@ public class XmlOrganisationLoader implements IOrganisationLoader {
       JAXBContext jaxbContext = JAXBContext.newInstance(Organisation.class);
       Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
       result = (Organisation) jaxbUnmarshaller.unmarshal(new File(filepath));
+      System.out.println(result);
     } catch (JAXBException e) {
       e.printStackTrace();
     }
