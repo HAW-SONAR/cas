@@ -50,7 +50,7 @@ public class PrototypeFormer {
         //Remove from open list
         estimatedBudgets.remove(bestFormation.getKey());
         knownBudgets.remove(bestFormation.getValue());
-        discardedFormations.add(bestFormation.getValue());
+        discardedFormations.put(bestFormation.getValue(), bestFormation.getKey());
         //TODO if the set of operations is known, calculate the set of potential operators (caching recommended) and define as recipients
         //TODO otherwise, broadcast to all: Either the new set of roots or the full formation (access control decision)
     }
