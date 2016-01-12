@@ -1,7 +1,8 @@
 package businessLogicLayer.formation;
 
 /**
- * Created by connorrohricht on 12.01.16.
+ * Central processor for semicentralized auction-based team formation in the SONAR cycle.
+ *
  */
 public interface CentralFormer {
 }

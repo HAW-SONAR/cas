@@ -1,7 +1,17 @@
 package businessLogicLayer.formation;
 
+import dataAccessLayer.IOpa;
+import dataAccessLayer.IProtocol;
+
 /**
- * Created by connorrohricht on 11.01.16.
  */
-public class ExecuteOperation {
+public class ExecuteOperation extends TeamOperation {
+    public ExecuteOperation(IOpa operator, IProtocol protocol) {
+        super(operator, protocol);
+    }
+
+    @Override
+    public String toString() {
+        return "[exec " + super.toString() + "]";
+    }
 }

@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 /**
- * Created by connorrohricht on 11.01.16.
  * Prototype central processor for semicentralized auction-based team formation in the SONAR cycle.
+ * Executes a modified A* (informed best-first) search algorithm optimized for concurrent calculation.
  * NOTE this version is a prototype and only supports up to 63 different operations.
  * NOTE operations are enumerated internally and 'Long' bitmaps are used to represent plans for simple equality checks.
  */
@@ -40,6 +40,8 @@ public class PrototypeFormer {
         this.operators = new ArrayList<IOpa>(operators);
     }
 
+    //TODO broadcast the roots on initialization
+
     private synchronized void assessBestFormation() {
         Map.Entry<Integer, Long> bestFormation = estimatedBudgets.firstEntry();
         //Only do this when an estimated formation exists
@@ -60,7 +62,6 @@ public class PrototypeFormer {
             operationIndex = operations.indexOf(operation);
         }
         if ((baseFormation & operationIndex) != 0) return;
-        //TODO baseFormation must not contain the index
         //TODO baseFormation must be known and estimated
         long offeredFormation = baseFormation | (1 << operationIndex);
         if (discardedFormations.containsKey(offeredFormation)) return; //NOTE Assuming monotonic heuristic
