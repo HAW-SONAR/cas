@@ -1,6 +1,6 @@
 package businessLogicLayer.formation;
 
-import dataAccessLayer.IOpa;
+import dataAccessLayer.agents.IOpa;
 import dataAccessLayer.IProtocol;
 
 /**
