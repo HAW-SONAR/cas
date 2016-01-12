@@ -6,12 +6,13 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 12.01.2016.
  */
-public class TeamformationOutput {
+public class OutputTask {
 
   protected String protocol;
   protected List<String> role;
+  private String opa;
 
-  public TeamformationOutput(String protocol, List<String> role) {
+  public OutputTask(String protocol, List<String> role) {
     this.protocol = protocol;
     this.role = role;
   }
@@ -32,19 +33,19 @@ public class TeamformationOutput {
   }
 
   @Override public String toString() {
-    return "TeamformationOutput{" +
+    return "OutputTask{" +
         "protocol='" + protocol + '\'' +
-        ", role=" + role +
+        ", roles=" + role +
         '}';
   }
 
   @Override public boolean equals(Object o) {
     if (this == o)
       return true;
-    if (!(o instanceof TeamformationOutput))
+    if (!(o instanceof OutputTask))
       return false;
 
-    TeamformationOutput that = (TeamformationOutput) o;
+    OutputTask that = (OutputTask) o;
 
     if (protocol != null ? !protocol.equals(that.protocol) : that.protocol != null)
       return false;

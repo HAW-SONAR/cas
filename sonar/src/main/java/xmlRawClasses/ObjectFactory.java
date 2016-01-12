@@ -1,7 +1,7 @@
 //
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.8-b130911.1802 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
+// ï¿½nderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
 // Generiert: 2016.01.11 um 10:57:03 PM CET 
 //
 
@@ -35,7 +35,7 @@ public class ObjectFactory {
     private final static QName _Opa_QNAME = new QName("", "opa");
     private final static QName _Input_QNAME = new QName("", "input");
     private final static QName _Protocol_QNAME = new QName("", "protocol");
-    private final static QName _Role_QNAME = new QName("", "role");
+    private final static QName _Role_QNAME = new QName("", "roles");
     private final static QName _Task_QNAME = new QName("", "task");
     private final static QName _Split_QNAME = new QName("", "split");
     private final static QName _Organisation_QNAME = new QName("", "organisation");
@@ -170,7 +170,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "role")
+    @XmlElementDecl(namespace = "", name = "roles")
     public JAXBElement<String> createRole(String value) {
         return new JAXBElement<String>(_Role_QNAME, String.class, null, value);
     }

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <organisation>
-	<protocol>
-		<name>arrangeCelebration</name>
-			<role>landlord</role>
-			<role>smarthome</role>
-		<file>file:///C:/organisation/protocols/arrangeCelebration.rnw</file>
-	</protocol>
-	<protocol>
-		<name>arrangeCelebration1</name>
-		<role>cook</role>
-		<role>butler</role>
-		<file>file:///C:/organisation/protocols/arrangeCelebration1.rnw</file>
-	</protocol>
-	<protocol>
-		<name>arrangeCelebration2</name>
-		<role>cook2</role>
-		<role>baker</role>
-		<file>file:///C:/organisation/protocols/arrangeCelebration2.rnw</file>
-	</protocol>
-	<protocol>
-		<name>arrangeCelebration3</name>
-		<role>butler2</role>
-		<role>brewer</role>
-		<file>file:///C:/organisation/protocols/arrangeCelebration3.rnw</file>
-	</protocol>
+    <protocol>
+        <name>arrangeCelebration</name>
+        <role>landlord</role>
+        <role>smarthome</role>
+        <file>res/protocols/arrangeCelebration.rnw</file>
+    </protocol>
+    <protocol>
+        <name>arrangeCelebration1</name>
+        <role>cook</role>
+        <role>butler</role>
+        <file>res/protocols/arrangeCelebration1.rnw</file>
+    </protocol>
+    <protocol>
+        <name>arrangeCelebration2</name>
+        <role>cook2</role>
+        <role>baker</role>
+        <file>res/protocols/arrangeCelebration2.rnw</file>
+    </protocol>
+    <protocol>
+        <name>arrangeCelebration3</name>
+        <role>butler2</role>
+        <role>brewer</role>
+        <file>res/protocols/arrangeCelebration3.rnw</file>
+    </protocol>
 	<opa>
 		<name>O1</name>
 		<task>

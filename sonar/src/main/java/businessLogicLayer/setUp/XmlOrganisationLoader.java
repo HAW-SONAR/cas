@@ -52,50 +52,50 @@ public class XmlOrganisationLoader implements IOrganisationLoader {
     //Transfer Opas
     List<IOpa> opas = new ArrayList<>();
     for (Opa o : xmlOrg.getOpa()) {
-      List<ITask> tasks = new ArrayList<>();
+      List<IRundes> tasks = new ArrayList<>();
       //Transfer Tasks
       for (Task t : o.getTask()) {
-        ITask task;
-        List<TeamformationInput> inputs;
-        List<TeamformationOutput> outputs;
+        IRundes task;
+        List<InputTask> inputs;
+        List<OutputTask> outputs;
         // Convert Execs into tasks without Output
         for (Exec e : t.getExec()) {
           inputs = new ArrayList<>();
-          inputs.add(new TeamformationInput(e.getInput().getProtocol(),e.getInput().getRole()));
-          task = new dataAccessLayer.tasks.Task(Operation.EXEC, inputs, null);
+          inputs.add(new InputTask(e.getInput().getProtocol(),e.getInput().getRole()));
+          task = new Rundes(Operation.EXEC, inputs, null);
           tasks.add(task);
         }
         // Convert Delegs into tasks
         for (Deleg d : t.getDeleg()) {
           inputs = new ArrayList<>();
           for (Input i : d.getInput()) {
-            inputs.add(new TeamformationInput(i.getProtocol(),i.getRole()));
+            inputs.add(new InputTask(i.getProtocol(),i.getRole()));
           }
           List<String> role = new ArrayList<>();
           role.add(d.getTo());
           outputs = new ArrayList<>();
-          outputs.add(new TeamformationOutput(null,role));
-          task = new dataAccessLayer.tasks.Task(Operation.DELEG, inputs, outputs);
+          outputs.add(new OutputTask(null,role));
+          task = new Rundes(Operation.DELEG, inputs, outputs);
           tasks.add(task);
         }
         // Convert Refine into tasks
         for (Refine r : t.getRefine()) {
           inputs = new ArrayList<>();
-          inputs.add(new TeamformationInput(r.getInput().getProtocol(),r.getInput().getRole()));
+          inputs.add(new InputTask(r.getInput().getProtocol(),r.getInput().getRole()));
           outputs = new ArrayList<>();
-          outputs.add(new TeamformationOutput(r.getOutput().getProtocol(),r.getOutput().getRole()));
-          task = new dataAccessLayer.tasks.Task(Operation.REFINE, inputs, outputs);
+          outputs.add(new OutputTask(r.getOutput().getProtocol(),r.getOutput().getRole()));
+          task = new Rundes(Operation.REFINE, inputs, outputs);
           tasks.add(task);
         }
         // Convert Split into tasks
         for (Split s : t.getSplit()) {
           inputs = new ArrayList<>();
-          inputs.add(new TeamformationInput(s.getInput().getProtocol(),s.getInput().getRole()));
+          inputs.add(new InputTask(s.getInput().getProtocol(),s.getInput().getRole()));
           outputs = new ArrayList<>();
           for (Output out : s.getOutput()) {
-            outputs.add(new TeamformationOutput(out.getProtocol(), out.getRole()));
+            outputs.add(new OutputTask(out.getProtocol(), out.getRole()));
           }
-          task = new dataAccessLayer.tasks.Task(Operation.SPLIT, inputs, outputs);
+          task = new Rundes(Operation.SPLIT, inputs, outputs);
           tasks.add(task);
         }
       }

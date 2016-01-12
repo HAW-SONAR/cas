@@ -5,13 +5,15 @@ import java.util.List;
 /**
  * Created by Daniel Hofmeister on 12.01.2016.
  */
-public class Task implements ITask {
+//TODO rename to Round thing
+public class Rundes implements IRundes {
 
   private Operation type;
-  private List<TeamformationInput> input;
-  private List<TeamformationOutput> output;
+  //TODO delete list make single
+  private List<InputTask> input;
+  private List<OutputTask> output;
 
-  public Task(Operation type, List<TeamformationInput> input, List<TeamformationOutput> output) {
+  public Rundes(Operation type, List<InputTask> input, List<OutputTask> output) {
     this.type = type;
     this.input = input;
     this.output = output;
@@ -25,24 +27,24 @@ public class Task implements ITask {
     this.type = type;
   }
 
-  public List<TeamformationInput> getInput() {
+  public List<InputTask> getInput() {
     return input;
   }
 
-  public void setInput(List<TeamformationInput> input) {
+  public void setInput(List<InputTask> input) {
     this.input = input;
   }
 
-  public List<TeamformationOutput> getOutput() {
+  public List<OutputTask> getOutput() {
     return output;
   }
 
-  public void setOutput(List<TeamformationOutput> output) {
+  public void setOutput(List<OutputTask> output) {
     this.output = output;
   }
 
   @Override public String toString() {
-    return "Task{" +
+    return "Rundes{" +
         "type=" + type +
         ", input=" + input +
         ", output=" + output +
@@ -52,16 +54,16 @@ public class Task implements ITask {
   @Override public boolean equals(Object o) {
     if (this == o)
       return true;
-    if (!(o instanceof Task))
+    if (!(o instanceof Rundes))
       return false;
 
-    Task task = (Task) o;
+    Rundes rundes = (Rundes) o;
 
-    if (type != task.type)
+    if (type != rundes.type)
       return false;
-    if (input != null ? !input.equals(task.input) : task.input != null)
+    if (input != null ? !input.equals(rundes.input) : rundes.input != null)
       return false;
-    return !(output != null ? !output.equals(task.output) : task.output != null);
+    return !(output != null ? !output.equals(rundes.output) : rundes.output != null);
 
   }
 
