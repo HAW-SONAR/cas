@@ -1,7 +1,6 @@
 package dataAccessLayer.agents;
 
-import dataAccessLayer.IPlan;
-import dataAccessLayer.IProtocol;
+
 import dataAccessLayer.protocols.IConflictParameter;
 import dataAccessLayer.protocols.IConflictParameterImpl;
 import dataAccessLayer.protocols.IConflictProtocol;
@@ -11,8 +10,6 @@ import dataAccessLayer.protocols.IConflictProtocolName;
 import dataAccessLayer.tasks.IEckiges;
 import dataAccessLayer.tasks.InputRound;
 import dataAccessLayer.tasks.Operation;
-import dataAccessLayer.tasks.OutputRound;
-import dataAccessLayer.tasks.treeReconstruction.Condition;
 import dataAccessLayer.tasks.treeReconstruction.Place;
 import dataAccessLayer.tasks.treeReconstruction.Transition;
 import dataAccessLayer.tasks.treeReconstruction.Tree;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
@@ -31,9 +27,9 @@ public class Opa implements IOpa {
 	private Oma oma;
 	private String name;
 	private boolean isReady;
-	// private List<IEckiges> tasks;
 	private List<String> resources;
-	private LinkedList<Place> taskStack;
+	private LinkedList<Place> initialTaskStack;
+	private LinkedList<Place> temporaryTaskStack;
 	private List<String> communicationProtocols;
 	private HashMap<IConflictProtocolName, IConflictProtocol> conflictProtocols;
 	private IConflictProtocolName actualOperationConflictProtocol;
@@ -41,7 +37,6 @@ public class Opa implements IOpa {
 	private Tree tree;
 	private HashMap<String, List<String>> execs;
 	private List<IOpa> opaProxys;
-	
 
 	public Opa(Oma oma, String name, List<IEckiges> tasks,
 			List<String> resources, List<String> communicationProtocols) {
@@ -49,34 +44,10 @@ public class Opa implements IOpa {
 		this.name = name;
 		this.isReady = true;
 		this.execs = new HashMap<String, List<String>>();
-		tree = new Tree();
-		System.out.println("Initialize " + this.getName());
-		for (IEckiges e : tasks) {
-			InputRound i = e.getInput().get(0);// there is just one input
-			if (e.getOutput() != null) {
-				tree.insert(i, e, e.getOutput());
-			} else {
-				tree.insert(i, e, null);
-			}
-		}
-		// for(Transition t :
-		// tree.getApplicableOperations(tree.getInitialPlace())){
-		// System.out.println("APPLICABLE: " + t.getOperation().getType() +
-		// " ON " + tree.getInitialPlace().getData1());
-		// System.out.println("CHOSE " + t.getOperation().getType() +
-		// " WITH OUTPUT: ");
-		// for(Place p : tree.applyOperation(tree.getInitialPlace(), t)){
-		// System.out.println(p);
-		// }
-		// }
-		// System.out.println("");
-
-		// System.out.println("=============Check-Tree======================");
-		// check();
-		// System.out.println("=============Check-Tree End==================");
-
+		tree = new Tree(tasks);
 		this.resources = resources;
-		this.taskStack = new LinkedList<Place>();
+		this.initialTaskStack = new LinkedList<Place>();
+		this.temporaryTaskStack = new LinkedList<Place>();
 		this.conflictProtocols = new HashMap<IConflictProtocolName, IConflictProtocol>();
 		this.communicationProtocols = communicationProtocols;
 		this.actualOperationConflictProtocol = IConflictProtocolName.MINMAX;
@@ -87,54 +58,7 @@ public class Opa implements IOpa {
 		this.conflictProtocols.put(actualDelegationConflictProtocol,
 				new IConflictProtocolImpl_DelegationConflict_Reliability(
 						actualDelegationConflictProtocol));
-	}
-
-	private void check() {
-		for (Condition c : tree.getPreconditions().keySet()) {
-			if (tree.getPreconditions().get(c).getPreset().getPreset() == null) {
-				System.out
-						.println("PRESET NULL: "
-								+ tree.getPreconditions().get(c).getPreset()
-										.getData1()
-								+ " "
-								+ tree.getPreconditions().get(c).getPreset()
-										.getData2());
-			}
-		}
-
-		for (Condition c : tree.getPostconditions().keySet()) {
-			if (tree.getPostconditions().get(c).getPostset() == null) {
-				System.out.println("POSTSET NULL: "
-						+ tree.getPostconditions().get(c).getPreset()
-								.getData1()
-						+ " "
-						+ tree.getPostconditions().get(c).getPreset()
-								.getData2());
-			} else if (tree.getPostconditions().get(c).getPostset().size() == 0) {
-				System.out.println("POSTSET EMPTY: "
-						+ tree.getPostconditions().get(c).getPreset()
-								.getData1()
-						+ " "
-						+ tree.getPostconditions().get(c).getPreset()
-								.getData2());
-			} else {
-
-				System.out.println("POSTSET NOT NULL NOT EMPTY: "
-						+ tree.getPostconditions().get(c).getPreset()
-								.getData1()
-						+ " "
-						+ tree.getPostconditions().get(c).getPreset()
-								.getData2()
-						+ " "
-						+ tree.getPostconditions().get(c).getOperation()
-								.getType());
-				for (Place p : tree.getPostconditions().get(c).getPostset()) {
-					System.out.println("BECAUSE: " + p.getData1() + " "
-							+ p.getData2());
-				}
-			}
-
-		}
+		System.out.println(this.getName() + " initialized");
 	}
 
 	public Oma getOma() {
@@ -150,13 +74,7 @@ public class Opa implements IOpa {
 	}
 
 	public void enqueue(Place p) {
-		taskStack.push(p);
-	}
-
-	@Override
-	public void setTask(IProtocol p) {
-		// TODO
-		// taskQueue.addLast(p);
+		initialTaskStack.push(p);
 	}
 
 	@Override
@@ -168,9 +86,9 @@ public class Opa implements IOpa {
 	public void start() {
 		// TODO Auto-generated method stub
 		for (Place p : tree.getInitialPlaces()) {
-			taskStack.push(p);
+			initialTaskStack.push(p);
 		}
-		while (!taskStack.isEmpty()) {
+		while (!initialTaskStack.isEmpty()) {
 			setIsReady(false);
 			System.out.println(getName() + " start");
 			teamFormation();
@@ -180,17 +98,24 @@ public class Opa implements IOpa {
 
 	private void teamFormation() {
 		// TODO Auto-generated method stub
-		while (!taskStack.isEmpty()) {
-			Place place = taskStack.pop();
+		temporaryTaskStack.push(initialTaskStack.pop());
+		while (!temporaryTaskStack.isEmpty()) {
+			Place place = temporaryTaskStack.pop();
+			
+			//Just console output
 			if (place.getData1() == null) {
 				System.out.println(this.getName() + " is working on Task "
+						+ place.getData2().getProtocol()
 						+ place.getData2().getRole());
 			} else {
 				System.out.println(this.getName() + " is working on Task "
+						+ place.getData1().getProtocol()
 						+ place.getData1().getRoles());
 			}
+			
 			List<Transition> operations = tree.getApplicableOperations(place);
-
+			
+			//Just console output
 			String conflicts = "";
 			for (Transition t : operations) {
 				conflicts += t.getOperation().getType() + ", ";
@@ -251,71 +176,46 @@ public class Opa implements IOpa {
 			List<Place> places = tree.applyOperation(place, chosen);
 			String result = "";
 			for (Place p : places) {
-				taskStack.push(p);
+				temporaryTaskStack.push(p);
 				if (p.getData1() == null) {
-					result += p.getData2().getRole() + ", ";
+					result += p.getData2().getProtocol()
+							+ p.getData2().getRole() + ", ";
 				} else {
-					result += p.getData1().getRoles() + ", ";
+					result += p.getData1().getProtocol()
+							+ p.getData1().getRoles() + ", ";
 				}
 			}
-			
-			if(chosen.getOperation().getType() == Operation.EXEC){
-				if(place.getData1() == null){
-					execs.put(place.getData2().getProtocol(), place.getData2().getRole());
-				}else{
-					execs.put(place.getData1().getProtocol(), place.getData1().getRoles());
+
+			if (chosen.getOperation().getType() == Operation.EXEC) {
+				if (place.getData1() == null) {
+					execs.put(place.getData2().getProtocol(), place.getData2()
+							.getRole());
+				} else {
+					execs.put(place.getData1().getProtocol(), place.getData1()
+							.getRoles());
 				}
 			}
-			
-			if(chosen.getOperation().getType() == Operation.DELEG){
-				for(IOpa o : opaProxys){
-					if(o.getName().equals(chosen.getOperation().getTo())){
-						System.out.println("DELEG TO " + chosen.getOperation().getTo());
+
+			if (chosen.getOperation().getType() == Operation.DELEG) {
+				for (IOpa o : opaProxys) {
+					if (o.getName().equals(chosen.getOperation().getTo())) {
+						System.out.println(this.getName() + " delegates to "
+								+ chosen.getOperation().getTo());
 						o.start();
 					}
 				}
 			}
-
-			System.out.println(this.getName() + " the result is: " + result);
-
+			if (!result.equals("")) {
+				System.out
+						.println(this.getName() + " the result is: " + result);
+			}
 		}
-
-	}
-
-	@Override
-	public IPlan computeGlobalPlan() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
 	public int getLevel() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public IPlan exec(IProtocol p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean deleg(IProtocol p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean split(IProtocol p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean refine(IProtocol p) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -407,12 +307,12 @@ public class Opa implements IOpa {
 		// TODO Auto-generated method stub
 		conflictProtocols.put(protocol.getName(), protocol);
 	}
-	
+
 	@Override
-	public String getInducedTeamWorkflow(){
+	public String getInducedTeamWorkflow() {
 		String res = "";
-		for(String protocol : execs.keySet()){
-			res+= protocol + "" + execs.get(protocol);
+		for (String protocol : execs.keySet()) {
+			res += protocol + "" + execs.get(protocol);
 		}
 		return res;
 	}

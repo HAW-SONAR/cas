@@ -13,10 +13,6 @@ public class Sonar implements ISonar {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Walks through the list of protocols and searchs for an opa that is ready
-	 * to take that task for further computations
-	 */
 	@Override
 	public void startSonar(IOrganisation organisation) {
 		// TODO Auto-generated method stub

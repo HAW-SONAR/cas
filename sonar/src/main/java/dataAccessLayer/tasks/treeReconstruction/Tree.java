@@ -10,7 +10,8 @@ import dataAccessLayer.tasks.OutputRound;
 
 /**
  * Represents a tree of the applicable operations according to the
- * Team-Formation-View of the organization.
+ * Team-Formation-View of the organization. This class provides access to
+ * to all initial Tasks.
  * 
  * @author Francis Opoku, 16.01.2016
  */
@@ -19,10 +20,19 @@ public class Tree {
 	HashMap<Condition, Transition> precond;
 	HashMap<Condition, Transition> postcond;
 
-	public Tree() {
+	public Tree(List<IEckiges> tasks) {
 		// TODO Auto-generated constructor stub
 		precond = new HashMap<Condition, Transition>();
 		postcond = new HashMap<Condition, Transition>();
+		
+		for (IEckiges e : tasks) {
+			InputRound i = e.getInput().get(0);// there is just one input
+			if (e.getOutput() != null) {
+				this.insert(i, e, e.getOutput());
+			} else {
+				this.insert(i, e, null);
+			}
+		}
 	}
 
 	/**

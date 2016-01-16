@@ -23,6 +23,7 @@ public class IConflictProtocolImpl_OperationConflict_MinMax implements IConflict
 		minResources = 0;
 		log = new HashMap<Operation, List<Long>>();
 		Random r = new Random();
+		//Just for presentation
 		for(Operation o : Operation.values()){
 			List<Long> values = new ArrayList<Long>();	
 			values.add(r.nextLong());

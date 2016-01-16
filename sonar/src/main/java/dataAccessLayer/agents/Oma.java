@@ -8,10 +8,6 @@ import dataAccessLayer.IProtocol;
  */
 public class Oma implements IOma {
 
-  @Override public void setTask(IProtocol p) {
-    // TODO Auto-generated method stub
-
-  }
 
   @Override public String getName() {
     // TODO Auto-generated method stub
