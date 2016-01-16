@@ -12,4 +12,6 @@ public interface IEckiges {
   public List<InputRound> getInput();
 
   public List<OutputRound> getOutput();
+  
+  public String getTo();
 }

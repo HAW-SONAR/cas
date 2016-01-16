@@ -49,6 +49,21 @@
 					<role>smarthome</role>
 				</output>
 			</split>
+			<split>
+				<input>
+					<protocol>arrangeCelebration1</protocol>
+					<role>cook</role>
+					<role>butler</role>
+				</input>
+				<output>
+					<protocol>arrangeCelebration1</protocol>
+					<role>cook</role>
+				</output>
+				<output>
+					<protocol>arrangeCelebration1</protocol>
+					<role>butler</role>
+				</output>
+			</split>
 			<refine>
 				<input>
 					<protocol>arrangeCelebration</protocol>

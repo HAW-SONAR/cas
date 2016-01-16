@@ -11,6 +11,7 @@ public class Eckiges implements IEckiges {
   //TODO delete list make single
   private List<InputRound> input;
   private List<OutputRound> output;
+  private String to;
 
   public Eckiges(Operation type, List<InputRound> input, List<OutputRound> output) {
     this.type = type;
@@ -40,6 +41,18 @@ public class Eckiges implements IEckiges {
 
   public void setOutput(List<OutputRound> output) {
     this.output = output;
+  }
+  
+  public void setTo(String newowner){
+	  this.to = newowner;
+  }
+  
+  /**
+   * Just for deleg operations
+   * @return owner The new owner of the input of this operation
+   */
+  public String getTo(){
+	  return to;
   }
 
   @Override public String toString() {

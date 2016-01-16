@@ -27,5 +27,8 @@ public interface IProtocol {
 	 * @return o The owner of that task
 	 */
 	public IOpa getOwner();
+	
+	public void setAssigned(boolean a);
 
+	public String getName();
 }

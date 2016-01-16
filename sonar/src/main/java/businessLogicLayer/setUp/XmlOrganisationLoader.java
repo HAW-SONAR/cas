@@ -6,11 +6,11 @@ import dataAccessLayer.Protocol;
 import dataAccessLayer.SonarOrganisation;
 import dataAccessLayer.tasks.*;
 import xmlRawClasses.*;
-import xmlRawClasses.Task;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,11 +71,13 @@ public class XmlOrganisationLoader implements IOrganisationLoader {
           for (Input i : d.getInput()) {
             inputs.add(new InputRound(i.getProtocol(),i.getRole()));
           }
-          List<String> role = new ArrayList<>();
-          role.add(d.getTo());
+//          List<String> role = new ArrayList<>();
+//          role.add(d.getTo());
           outputs = new ArrayList<>();
-          outputs.add(new OutputRound(null,role));
-          task = new Eckiges(Operation.DELEG, inputs, outputs);
+          outputs.add(new OutputRound(d.getInput().get(0).getProtocol(),d.getInput().get(0).getRole()));
+          task = new Eckiges(Operation.DELEG, inputs, null);//changed from output -> null
+   
+          ((Eckiges)task).setTo(d.getTo());
           tasks.add(task);
         }
         // Convert Refine into tasks

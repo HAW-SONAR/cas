@@ -15,7 +15,7 @@ public class Main {
     SonarOrganisation Org = orgLoader.loadOrganisation("res/organisationv2.xml");
     System.out.println(Org);
     //TODO instantiate sonar
-    //Sonar sonar = new Sonar();
-    //sonar.startSonar(Org);
+    Sonar sonar = new Sonar();
+    sonar.startSonar(Org);
   }
 }

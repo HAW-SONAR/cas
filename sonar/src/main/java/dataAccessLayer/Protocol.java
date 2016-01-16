@@ -13,11 +13,13 @@ public class Protocol implements IProtocol {
   private String name;
   private List<String> roles;
   private String file;
+  private boolean assigned;
 
   public Protocol(String name, List<String> roles, String file) {
     this.name = name;
     this.roles = roles;
     this.file = file;
+    this.assigned = false;
   }
 
   @Override public List<String> getRoles() {
@@ -29,7 +31,7 @@ public class Protocol implements IProtocol {
   }
 
   @Override public boolean isAssigned() {
-    return false;
+    return assigned;
   }
 
   @Override public IOpa getOwner() {
@@ -87,4 +89,10 @@ public class Protocol implements IProtocol {
     result = 31 * result + (file != null ? file.hashCode() : 0);
     return result;
   }
+
+@Override
+public void setAssigned(boolean a) {
+	// TODO Auto-generated method stub
+	this.assigned = a;
+}
 }
