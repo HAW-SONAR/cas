@@ -12,10 +12,10 @@ public class Main {
 
   public static void main(String [ ] args) {
     IOrganisationLoader orgLoader = new XmlOrganisationLoader();
-    SonarOrganisation Org = orgLoader.loadOrganisation("res/organisationv2.xml");
-    System.out.println(Org);
+    SonarOrganisation org = orgLoader.loadOrganisation("res/organisationv2.xml");
+    //System.out.println(org);
     //TODO instantiate sonar
-    //Sonar sonar = new Sonar();
-    //sonar.startSonar(Org);
+    Sonar sonar = new Sonar(org);
+    sonar.run();
   }
 }

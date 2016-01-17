@@ -1,25 +1,24 @@
 package dataAccessLayer.agents;
 
-import dataAccessLayer.IPlan;
-import dataAccessLayer.IProtocol;
+import dataAccessLayer.Plan;
+import dataAccessLayer.tasks.IEckiges;
+import dataAccessLayer.tasks.Round;
+
+import java.util.List;
 
 public interface IOpa extends IAgent {
-	
-	/**
-	 * Implementation of A*
-	 * @return
-	 */
-	public IPlan computeGlobalPlan();
-	
-	public int getLevel();
-	
-	public IPlan exec(IProtocol p);
-	
-	public boolean deleg(IProtocol p);
-	
-	public boolean split(IProtocol p);
-	
-	public boolean refine(IProtocol p);
-	
-	public boolean isReady();
+
+  public List<IEckiges> getTasks();
+
+  public List<String> getResources();
+
+  public void addStartTask(Round protocol);
+
+  public List<Round> getStartableTasks();
+
+  public int getRoundOffer(Round round);
+
+  public void startTeamformation(Round round, Plan plan);
+
+  public void init();
 }

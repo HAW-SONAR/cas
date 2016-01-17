@@ -1,15 +1,11 @@
 package dataAccessLayer.agents;
 
+import dataAccessLayer.tasks.IEckiges;
 
-import dataAccessLayer.IPlan;
-import dataAccessLayer.IProtocol;
+/**
+ * Created by Daniel Hofmeister on 16.01.2016.
+ */
+public interface IOma extends IAgent {
 
-public interface IOma extends IAgent{
-	
-	public IPlan getLocalPlan();
-	
-	public boolean hasLocalPlan();
-	
-	public IPlan exec(IProtocol p);
 
 }

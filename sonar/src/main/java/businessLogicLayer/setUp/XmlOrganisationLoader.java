@@ -1,5 +1,7 @@
 package businessLogicLayer.setUp;
 
+import businessLogicLayer.sonar.IOpaBlackBoard;
+import businessLogicLayer.sonar.OpaBlackBoard;
 import dataAccessLayer.agents.IOpa;
 import dataAccessLayer.IProtocol;
 import dataAccessLayer.Protocol;
@@ -14,12 +16,14 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
  */
 public class XmlOrganisationLoader implements IOrganisationLoader {
 
+  private static final Logger logger = Logger.getLogger(XmlOrganisationLoader.class.getName());
 
   public SonarOrganisation loadOrganisation(String filepath) {
     Organisation result = null;
@@ -49,6 +53,8 @@ public class XmlOrganisationLoader implements IOrganisationLoader {
     }
     result.setProtocols(protocols);
 
+    IOpaBlackBoard blackBoardOpas = new OpaBlackBoard();
+
     //Transfer Opas
     List<IOpa> opas = new ArrayList<>();
     for (Opa o : xmlOrg.getOpa()) {
@@ -56,52 +62,55 @@ public class XmlOrganisationLoader implements IOrganisationLoader {
       //Transfer Tasks
       for (Task t : o.getTask()) {
         IEckiges task;
-        List<InputRound> inputs;
-        List<OutputRound> outputs;
+        List<Round> inputs;
+        List<Round> outputs;
         // Convert Execs into tasks without Output
         for (Exec e : t.getExec()) {
-          inputs = new ArrayList<>();
-          inputs.add(new InputRound(e.getInput().getProtocol(),e.getInput().getRole()));
-          task = new Eckiges(Operation.EXEC, inputs, null);
+          task = new Eckiges(Operation.EXEC,
+              new Round(e.getInput().getProtocol(),e.getInput().getRole(), o.getName()), null);
           tasks.add(task);
         }
         // Convert Delegs into tasks
         for (Deleg d : t.getDeleg()) {
           inputs = new ArrayList<>();
           for (Input i : d.getInput()) {
-            inputs.add(new InputRound(i.getProtocol(),i.getRole()));
+            inputs.add(new Round(i.getProtocol(),i.getRole(), o.getName()));
           }
-          List<String> role = new ArrayList<>();
-          role.add(d.getTo());
           outputs = new ArrayList<>();
-          outputs.add(new OutputRound(null,role));
-          task = new Eckiges(Operation.DELEG, inputs, outputs);
+          outputs.add(new Round(inputs.get(0).getProtocol(),inputs.get(0).getRoles(), d.getTo()));
+          task = new Eckiges(Operation.DELEG, inputs.get(0), outputs);
           tasks.add(task);
         }
         // Convert Refine into tasks
         for (Refine r : t.getRefine()) {
-          inputs = new ArrayList<>();
-          inputs.add(new InputRound(r.getInput().getProtocol(),r.getInput().getRole()));
           outputs = new ArrayList<>();
-          outputs.add(new OutputRound(r.getOutput().getProtocol(),r.getOutput().getRole()));
-          task = new Eckiges(Operation.REFINE, inputs, outputs);
+          outputs.add(new Round(r.getOutput().getProtocol(),r.getOutput().getRole(), o.getName()));
+          task = new Eckiges(Operation.REFINE,
+              new Round(r.getInput().getProtocol(),r.getInput().getRole(),o.getName()), outputs);
           tasks.add(task);
         }
         // Convert Split into tasks
         for (Split s : t.getSplit()) {
-          inputs = new ArrayList<>();
-          inputs.add(new InputRound(s.getInput().getProtocol(),s.getInput().getRole()));
           outputs = new ArrayList<>();
           for (Output out : s.getOutput()) {
-            outputs.add(new OutputRound(out.getProtocol(), out.getRole()));
+            outputs.add(new Round(out.getProtocol(), out.getRole(), o.getName()));
           }
-          task = new Eckiges(Operation.SPLIT, inputs, outputs);
+          task = new Eckiges(Operation.SPLIT,
+              new Round(s.getInput().getProtocol(),s.getInput().getRole(), o.getName()), outputs);
           tasks.add(task);
         }
       }
 
       IOpa opa = new dataAccessLayer.agents.Opa(null,o.getName(),tasks, o.getResource(),
-          o.getCommunicationProtocol());
+          o.getCommunicationProtocol(), blackBoardOpas);
+      blackBoardOpas.registerOpa(opa);
+      // TODO find a more clever way to determine starting tasks
+      if (opa.getId().equals("O1")) {
+        List<String> rol = new ArrayList<>();
+        rol.add("landlord");
+        rol.add("smarthome");
+        opa.addStartTask(new Round("arrangeCelebration",rol,"O1"));
+      }
       opas.add(opa);
     }
     result.setAllOpas(opas);

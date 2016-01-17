@@ -1,8 +1,5 @@
 package dataAccessLayer;
 
-import dataAccessLayer.agents.IOpa;
-import dataAccessLayer.tasks.Operation;
-
 import java.util.List;
 
 /**
@@ -13,19 +10,9 @@ import java.util.List;
 public interface IProtocol {
 
 	public List<String> getRoles();
-	
-	public List<Operation> getApplicableOperations();
-	
-	/**
-	 * True when the protocol has been assigned to an agent
-	 * @return
-	 */
-	public boolean isAssigned();
-	
-	/**
-	 * Each protocol (task) has an owner.
-	 * @return o The owner of that task
-	 */
-	public IOpa getOwner();
+
+  public String getName();
+
+  public String getFile();
 
 }

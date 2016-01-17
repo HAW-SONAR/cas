@@ -8,11 +8,10 @@ import java.util.List;
 public class Eckiges implements IEckiges {
 
   private Operation type;
-  //TODO delete list make single
-  private List<InputRound> input;
-  private List<OutputRound> output;
+  private Round input;
+  private List<Round> output;
 
-  public Eckiges(Operation type, List<InputRound> input, List<OutputRound> output) {
+  public Eckiges(Operation type, Round input, List<Round> output) {
     this.type = type;
     this.input = input;
     this.output = output;
@@ -26,19 +25,19 @@ public class Eckiges implements IEckiges {
     this.type = type;
   }
 
-  public List<InputRound> getInput() {
+  public Round getInput() {
     return input;
   }
 
-  public void setInput(List<InputRound> input) {
+  public void setInput(Round input) {
     this.input = input;
   }
 
-  public List<OutputRound> getOutput() {
+  public List<Round> getOutput() {
     return output;
   }
 
-  public void setOutput(List<OutputRound> output) {
+  public void setOutput(List<Round> output) {
     this.output = output;
   }
 

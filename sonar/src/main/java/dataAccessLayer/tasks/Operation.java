@@ -2,6 +2,9 @@ package dataAccessLayer.tasks;
 
 public enum Operation {
 	
-	EXEC, DELEG, SPLIT, REFINE;
+	EXEC("Exec"), DELEG("Deleg"), SPLIT("split"), REFINE("refine");
 
+  Operation(String exec) {
+
+  }
 }

@@ -1,27 +1,19 @@
 package dataAccessLayer.agents;
 
 import dataAccessLayer.IProtocol;
+import dataAccessLayer.tasks.IEckiges;
 
+/**
+ * Created by Daniel Hofmeister on 16.01.2016.
+ */
 public interface IAgent {
-	
-	/**
-	 * Get's the offer of this OPA for that protocol (required for A*)
-	 * @param p
-	 * @return o The cost from this OPA to handle the protocol p
-	 */
-	public double getOffer(IProtocol p);
-	
-	/**
-	 * Sets the initial Eckiges for the first OPA
-	 * @param p
-	 */
-	public void setTask(IProtocol p);
-	
-	public String getName();
-	
-	/**
-	 * An agent must extends Thread
-	 */
-	public void start();
 
+  public String getId();
+
+  /**
+   * Calculates the "cost" of a given "eckiges" operation.
+   * @param eckiges operation that cost something.
+   * @return cost
+   */
+  public int getEckigesOffer(IEckiges eckiges);
 }

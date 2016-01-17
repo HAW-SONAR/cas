@@ -9,7 +9,7 @@ public interface IEckiges {
 
   public Operation getType();
 
-  public List<InputRound> getInput();
+  public Round getInput();
 
-  public List<OutputRound> getOutput();
+  public List<Round> getOutput();
 }

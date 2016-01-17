@@ -4,6 +4,7 @@ import dataAccessLayer.agents.IOma;
 import dataAccessLayer.agents.IOpa;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
@@ -12,6 +13,7 @@ public class SonarOrganisation implements IOrganisation {
 
   private List<IOpa> allOpas;
   private List<IProtocol> protocols;
+  private static final Logger logger = Logger.getLogger(SonarOrganisation.class.getName());
 
   public SonarOrganisation() {
   }

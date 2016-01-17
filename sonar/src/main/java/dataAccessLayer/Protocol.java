@@ -24,18 +24,7 @@ public class Protocol implements IProtocol {
     return this.roles;
   }
 
-  @Override public List<Operation> getApplicableOperations() {
-    return null;
-  }
-
-  @Override public boolean isAssigned() {
-    return false;
-  }
-
-  @Override public IOpa getOwner() {
-    return null;
-  }
-
+  @Override
   public String getName() {
     return name;
   }
@@ -48,6 +37,7 @@ public class Protocol implements IProtocol {
     this.roles = roles;
   }
 
+  @Override
   public String getFile() {
     return file;
   }
