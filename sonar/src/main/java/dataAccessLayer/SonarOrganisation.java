@@ -5,40 +5,37 @@ import dataAccessLayer.agents.IOpa;
 
 import java.util.List;
 
-/**
- * Created by Daniel Hofmeister on 04.01.2016.
- */
 public class SonarOrganisation implements IOrganisation {
 
-  private List<IOpa> allOpas;
+  private List<IOpa> opas;
   private List<IProtocol> protocols;
 
   public SonarOrganisation() {
   }
 
-  public SonarOrganisation(List<IOpa> allOpas, List<IProtocol> protocols) {
-    this.allOpas = allOpas;
+  public SonarOrganisation(List<IOpa> opas, List<IProtocol> protocols) {
+    this.opas = opas;
     this.protocols = protocols;
   }
 
-  @Override public List<IOpa> getAllOpas() {
-    return allOpas;
+  public List<IOpa> getOpas() {
+    return opas;
   }
 
   @Override public void addOpa(IOpa opa) {
-    allOpas.add(opa);
+    opas.add(opa);
   }
 
   @Override public void deleteOpa(IOpa opa) {
-    if (allOpas.contains(opa)) {
-      allOpas.remove(opa);
+    if (opas.contains(opa)) {
+      opas.remove(opa);
     } else {
       throw new IllegalStateException("Opa was not part of this SonarOrganisation");
     }
   }
 
-  public void setAllOpas(List<IOpa> allOpas) {
-    this.allOpas = allOpas;
+  public void setOpas(List<IOpa> opas) {
+    this.opas = opas;
   }
 
   public void setProtocols(List<IProtocol> protocols) {
@@ -68,7 +65,7 @@ public class SonarOrganisation implements IOrganisation {
 
   @Override public String toString() {
     return "SonarOrganisation{" +
-        "allOpas=" + allOpas +
+        "opas=" + opas +
         ", protocols=" + protocols +
         '}';
   }
@@ -81,14 +78,14 @@ public class SonarOrganisation implements IOrganisation {
 
     SonarOrganisation that = (SonarOrganisation) o;
 
-    if (allOpas != null ? !allOpas.equals(that.allOpas) : that.allOpas != null)
+    if (opas != null ? !opas.equals(that.opas) : that.opas != null)
       return false;
     return !(protocols != null ? !protocols.equals(that.protocols) : that.protocols != null);
 
   }
 
   @Override public int hashCode() {
-    int result = allOpas != null ? allOpas.hashCode() : 0;
+    int result = opas != null ? opas.hashCode() : 0;
     result = 31 * result + (protocols != null ? protocols.hashCode() : 0);
     return result;
   }

@@ -1,30 +1,30 @@
 package dataAccessLayer.protocols;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import dataAccessLayer.tasks.InputRound;
-import dataAccessLayer.tasks.Operation;
+import dataAccessLayer.tasks.TeamOperation;
+import dataAccessLayer.tasks.OperationType;
 
-public class IConflictProtocolImpl_OperationConflict_MinMax implements IConflictProtocol {
+public class MinMaxOperationProtocol implements ConflictResolutionProtocol<TeamOperation> {
 
 	private float resources;
 	private float minResources;
-	private HashMap<Operation, List<Long>> log; //Operation -> how much time it took last time for that operation
-	private IConflictProtocolName name;
+	private HashMap<OperationType, List<Long>> log; //OperationType -> how much time it took last time for that operation
+	private ConflictResolutionProtocolName name;
 	
-	public IConflictProtocolImpl_OperationConflict_MinMax(IConflictProtocolName name) {
+	public MinMaxOperationProtocol(ConflictResolutionProtocolName name) {
 		// TODO ask meta-organisation how much resources have to be free
 		this.name = name;
 		resources = 100;
 		minResources = 0;
-		log = new HashMap<Operation, List<Long>>();
+		log = new HashMap<OperationType, List<Long>>();
 		Random r = new Random();
 		//Just for presentation
-		for(Operation o : Operation.values()){
+		for(OperationType o : OperationType.values()){
 			List<Long> values = new ArrayList<Long>();	
 			values.add(r.nextLong());
 			values.add(r.nextLong());
@@ -38,10 +38,13 @@ public class IConflictProtocolImpl_OperationConflict_MinMax implements IConflict
 	 * @return result a conflict parameter which contains the selected operation
 	 */
 	@Override
-	public IConflictParameter<? extends Object> solveConflict(
-			List<IConflictParameter<? extends Object>> params) {
-		// TODO Auto-generated method stub
-		IConflictParameter<? extends Object> o_tmp = null;
+	public ConflictOption<TeamOperation> solveConflict(
+			List<ConflictOption<TeamOperation>> params) {
+        //TODO
+        //just pick any for testing
+        return params.get(0);
+
+		/*ConflictOption<TeamOperation> o_tmp = null;
 		long t1_tmp = -1, t2_tmp = -1;
 		double resources;
 		InputRound task = (InputRound) params.get(0).getValue();
@@ -57,34 +60,33 @@ public class IConflictProtocolImpl_OperationConflict_MinMax implements IConflict
 			}
 		}
 		
-		if((Operation)o_tmp.getValue() == Operation.EXEC){
+		/*if((TeamOperation)o_tmp.getValue() == OperationType.EXEC){
 			resources = resources();
 			if(!(resources > minResources)){
 				params.remove(o_tmp);
 				o_tmp = solveConflict(params);
 			}
-		}
+		}*/ //TODO
 		
-		return o_tmp;
+		/*return o_tmp;*/
 	}
 
 	private long time(InputRound task,
-			IConflictParameter<? extends Object> iConflictParameter) {
-		// TODO Auto-generated method stub
+			ConflictOption<TeamOperation> iConflictParameter) {
 		long n = task.getRoles().size();
-		long ri[] = getLog((Operation) iConflictParameter.getValue());
+		long ri[] = getLog(iConflictParameter.getValue());
 		long roles = ri[0];
 		long time = ri[1];
 		
-		if((Operation)iConflictParameter.getValue() == Operation.DELEG){
-			return (time*n)/(Math.max(roles, 1)) + time(task, new IConflictParameterImpl<Object>(Operation.EXEC));
-		}
+		/*if((TeamOperation)iConflictParameter.getValue() == OperationType.DELEG){
+			return 0; //TODO
+			//return (time*n)/(Math.max(roles, 1)) + time(task, new PlainConflictOption<TeamOperation>(OperationType.EXEC));
+		}*/
 		
 		return (time*n)/Math.max(roles, 1);
 	}
 
-	private long[] getLog(Operation op) {
-		// TODO Auto-generated method stub
+	private long[] getLog(TeamOperation op) {
 		long[] ri = new long[2];
 		if(!log.containsKey(op)){
 			ri = new long[2];
@@ -104,7 +106,7 @@ public class IConflictProtocolImpl_OperationConflict_MinMax implements IConflict
 	}
 	
 	@Override
-	public IConflictProtocolName getName(){
+	public ConflictResolutionProtocolName getName(){
 		return name;
 	}
 
@@ -112,6 +114,6 @@ public class IConflictProtocolImpl_OperationConflict_MinMax implements IConflict
 
 
 
-	
+
 
 }

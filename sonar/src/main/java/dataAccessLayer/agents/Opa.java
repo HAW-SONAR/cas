@@ -1,63 +1,75 @@
 package dataAccessLayer.agents;
 
 
-import dataAccessLayer.protocols.IConflictParameter;
-import dataAccessLayer.protocols.IConflictParameterImpl;
-import dataAccessLayer.protocols.IConflictProtocol;
+import dataAccessLayer.protocols.ConflictOption;
+import dataAccessLayer.protocols.PlainConflictOption;
+import dataAccessLayer.protocols.ConflictResolutionProtocol;
 import dataAccessLayer.protocols.IConflictProtocolImpl_DelegationConflict_Reliability;
-import dataAccessLayer.protocols.IConflictProtocolImpl_OperationConflict_MinMax;
-import dataAccessLayer.protocols.IConflictProtocolName;
-import dataAccessLayer.tasks.IEckiges;
-import dataAccessLayer.tasks.InputRound;
-import dataAccessLayer.tasks.Operation;
-import dataAccessLayer.tasks.treeReconstruction.Place;
-import dataAccessLayer.tasks.treeReconstruction.Transition;
-import dataAccessLayer.tasks.treeReconstruction.Tree;
+import dataAccessLayer.protocols.MinMaxOperationProtocol;
+import dataAccessLayer.protocols.ConflictResolutionProtocolName;
+import dataAccessLayer.tasks.AssignedTask;
+import dataAccessLayer.tasks.OperationType;
+import dataAccessLayer.tasks.TeamOperation;
+import dataAccessLayer.tasks.treeReconstruction.TFVForest;
+import dataAccessLayer.tasks.treeReconstruction.TFVPlace;
+import dataAccessLayer.tasks.treeReconstruction.TFVTransition;
+import renderer.PlaceRenderer;
+import renderer.TFVRenderer;
+import renderer.TransitionRenderer;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * Created by Daniel Hofmeister on 04.01.2016.
  */
 public class Opa implements IOpa {
+    /**
+     * The OPA's knowledge of the current team formation
+     */
+	private TFVForest formationView;
 
 	private Oma oma;
 	private String name;
-	private boolean isReady;
+	private boolean isReady = true;
 	private List<String> resources;
-	private LinkedList<Place> initialTaskStack;
-	private LinkedList<Place> temporaryTaskStack;
+	private LinkedList<AssignedTask> generalTasks = new LinkedList<>();
+	private LinkedList<AssignedTask> workingTasks = new LinkedList<>();
+    private LinkedList<AssignedTask> executingTasks = new LinkedList<>();
 	private List<String> communicationProtocols;
-	private HashMap<IConflictProtocolName, IConflictProtocol> conflictProtocols;
-	private IConflictProtocolName actualOperationConflictProtocol;
-	private IConflictProtocolName actualDelegationConflictProtocol;
-	private Tree tree;
+	private HashMap<ConflictResolutionProtocolName,
+                    ConflictResolutionProtocol<TeamOperation>> operationConflictProtocols = new HashMap<>();
+    private HashMap<ConflictResolutionProtocolName,
+                    ConflictResolutionProtocol<String>> delegationConflictProtocols = new HashMap<>();
+	private ConflictResolutionProtocolName actualOperationConflictProtocol;
+	private ConflictResolutionProtocolName actualDelegationConflictProtocol;
+	private TFVForest tree;
 	private HashMap<String, List<String>> execs;
-	private List<IOpa> opaProxys;
+	private List<IOpa> opaProxies;
 
-	public Opa(Oma oma, String name, List<IEckiges> tasks,
-			List<String> resources, List<String> communicationProtocols) {
+	public Opa(Oma oma, String name, List<TeamOperation> operations,
+               List<String> resources, List<String> communicationProtocols) {
 		this.oma = oma;
 		this.name = name;
-		this.isReady = true;
-		this.execs = new HashMap<String, List<String>>();
-		tree = new Tree(tasks);
 		this.resources = resources;
-		this.initialTaskStack = new LinkedList<Place>();
-		this.temporaryTaskStack = new LinkedList<Place>();
-		this.conflictProtocols = new HashMap<IConflictProtocolName, IConflictProtocol>();
 		this.communicationProtocols = communicationProtocols;
-		this.actualOperationConflictProtocol = IConflictProtocolName.MINMAX;
-		this.actualDelegationConflictProtocol = IConflictProtocolName.RELIABILITY;
-		this.conflictProtocols.put(actualOperationConflictProtocol,
-				new IConflictProtocolImpl_OperationConflict_MinMax(
-						actualOperationConflictProtocol));
-		this.conflictProtocols.put(actualDelegationConflictProtocol,
-				new IConflictProtocolImpl_DelegationConflict_Reliability(
-						actualDelegationConflictProtocol));
+        this.formationView = new TFVForest(operations);
+        this.formationView.setName(name + "'s formation view");
+        System.out.print(formationView);
+        this.actualOperationConflictProtocol = ConflictResolutionProtocolName.MINMAX;
+		this.actualDelegationConflictProtocol = ConflictResolutionProtocolName.RELIABILITY;
+		this.operationConflictProtocols.put(actualOperationConflictProtocol,
+				                            new MinMaxOperationProtocol(actualOperationConflictProtocol));
+		this.delegationConflictProtocols.put(actualDelegationConflictProtocol,
+                                             new IConflictProtocolImpl_DelegationConflict_Reliability(actualDelegationConflictProtocol));
 		System.out.println(this.getName() + " initialized");
 	}
 
@@ -69,171 +81,170 @@ public class Opa implements IOpa {
 		this.oma = oma;
 	}
 
-	public void removeOma() {
-		oma = null;
+    //TODO document
+	public void enqueue(AssignedTask task) {
+		generalTasks.push(task);
 	}
 
-	public void enqueue(Place p) {
-		initialTaskStack.push(p);
-	}
+    //TODO document
+    public void enqueueRootTask() {
+        for (AssignedTask task : getOwnRootTasks()) {
+            enqueue(task);
+			break;
+        }
+    }
 
 	@Override
+	public boolean hasExecutableTasks() {
+		return executingTasks.size() > 0;
+	}
+
+	//TODO document
+    private void dequeue() {
+        workingTasks.push(generalTasks.pop());
+    }
+
+    //TODO document
+    private void enqueueWorking(AssignedTask task) {
+        workingTasks.push(task);
+    }
+
+    //TODO document
+    private AssignedTask dequeueWorking() {
+        return workingTasks.pop();
+    }
+
+    //TODO document
+    private void enqueueExecuting(AssignedTask task) {
+        executingTasks.push(task);
+    }
+
+
+    @Override
 	public String getName() {
 		return name;
 	}
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
-		for (Place p : tree.getInitialPlaces()) {
-			initialTaskStack.push(p);
-		}
-		while (!initialTaskStack.isEmpty()) {
+        System.out.println("OPA starting: " + this);
+
+        //Run until no tasks are available
+		while (!generalTasks.isEmpty()) {
 			setIsReady(false);
-			System.out.println(getName() + " start");
 			teamFormation();
 			setIsReady(true);
 		}
 	}
 
+    /**
+     * @return A list of the OPA's root (initial) tasks.
+     */
+	private List<AssignedTask> getOwnRootTasks() {
+        ArrayList<AssignedTask> tasks = new ArrayList<>();
+        for (TFVPlace root : formationView.getRoots()) {
+            AssignedTask task = root.getTask();
+            if (task.getOperator() == name) {
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
+
+    /**
+     * @return The current protocol for solving operation conflicts
+     */
+    private ConflictResolutionProtocol<TeamOperation> getOperationConflictProtocol() {
+        return operationConflictProtocols.get(actualOperationConflictProtocol);
+    }
+
+    /**
+     * Returns an agent proxy for a named agent
+     * @param name The name of the agent
+     * @return An agent proxy for the specified name
+     */
+    private IOpa getAgentProxy(String name) {
+        for (IOpa proxy : opaProxies) {
+            if (proxy.getName().equals(name)) {
+                return proxy;
+            }
+        }
+        return null;
+    }
+
+    //TODO document
 	private void teamFormation() {
-		// TODO Auto-generated method stub
-		temporaryTaskStack.push(initialTaskStack.pop());
-		while (!temporaryTaskStack.isEmpty()) {
-			Place place = temporaryTaskStack.pop();
-			
-			//Just console output
-			if (place.getData1() == null) {
-				System.out.println(this.getName() + " is working on Task "
-						+ place.getData2().getProtocol()
-						+ place.getData2().getRole());
-			} else {
-				System.out.println(this.getName() + " is working on Task "
-						+ place.getData1().getProtocol()
-						+ place.getData1().getRoles());
-			}
-			
-			List<Transition> operations = tree.getApplicableOperations(place);
-			
-			//Just console output
-			String conflicts = "";
-			for (Transition t : operations) {
-				conflicts += t.getOperation().getType() + ", ";
-			}
-			System.out.println(this.getName() + " has applicable operations: "
-					+ conflicts);
+        //Dequeue a task for working
+        dequeue();
 
-			Transition chosen = null;
-			if (operations.size() > 1) {
+		while (!workingTasks.isEmpty()) {
+            //Dequeue a working task
+			AssignedTask task = dequeueWorking();
+            System.out.println("Analysing: " + task);
+            //If the task is assigned to another agent, transfer it
+            String operator = task.getOperator();
+            if (!operator.equals(getName())) {
+                IOpa assignedAgent = getAgentProxy(operator);
+                assignedAgent.enqueue(task);
+                //Start the operator
+                //NOTE the agents will later run concurrently instead
+                if (assignedAgent.isReady()) {
+                    assignedAgent.start();
+                }
+                continue;
+            }
+            //Acquire all transitions with applicable operations that solve the task
+			List<TFVTransition> transitions = formationView.getApplicableTransitions(task);
+			System.out.println(this + " has " + transitions.size() + " applicable operations.");
 
-				List<IConflictParameter<?>> params = new ArrayList<IConflictParameter<?>>();
-				IConflictParameter<InputRound> input = new IConflictParameterImpl<InputRound>(
-						place.getData1());
-				params.add(input);
-				List<Operation> ops = new ArrayList<Operation>();
-				for (Transition t : operations) {
-					if (!ops.contains(t.getOperation().getType())) {
-						params.add(new IConflictParameterImpl<Operation>(t
-								.getOperation().getType()));
-						ops.add(t.getOperation().getType());
-					}
-				}
-
-				@SuppressWarnings("unchecked")
-				IConflictParameter<Operation> chosenWrapped = (IConflictParameter<Operation>) conflictProtocols
-						.get(actualOperationConflictProtocol).solveConflict(
-								params);
-
-				System.out.println(this.getName() + " chose the operation "
-						+ chosenWrapped.getValue());
-
-				int delegables = 0;
-				if (chosenWrapped.getValue() == Operation.DELEG) {
-					for (Transition t : operations) {
-						if (t.getOperation().getType() == Operation.DELEG) {
-							delegables++;
-						}
-					}
-					if (delegables > 1) {
-						// TODO: Conflict protocol
-						System.out.println(this.getName()
-								+ " has a Delegation conflict ");
-					}
-				} else {
-					for (Transition t : operations) {
-						if (t.getOperation().getType() == chosenWrapped
-								.getValue()) {
-							chosen = t;
-							break;
-						}
-					}
-				}
-			} else {
-				chosen = operations.get(0);
-				System.out.println(this.getName() + " chose the operation "
-						+ chosen.getOperation().getType());
-			}
-			List<Place> places = tree.applyOperation(place, chosen);
-			String result = "";
-			for (Place p : places) {
-				temporaryTaskStack.push(p);
-				if (p.getData1() == null) {
-					result += p.getData2().getProtocol()
-							+ p.getData2().getRole() + ", ";
-				} else {
-					result += p.getData1().getProtocol()
-							+ p.getData1().getRoles() + ", ";
-				}
-			}
-
-			if (chosen.getOperation().getType() == Operation.EXEC) {
-				if (place.getData1() == null) {
-					execs.put(place.getData2().getProtocol(), place.getData2()
-							.getRole());
-				} else {
-					execs.put(place.getData1().getProtocol(), place.getData1()
-							.getRoles());
-				}
-			}
-
-			if (chosen.getOperation().getType() == Operation.DELEG) {
-				for (IOpa o : opaProxys) {
-					if (o.getName().equals(chosen.getOperation().getTo())) {
-						System.out.println(this.getName() + " delegates to "
-								+ chosen.getOperation().getTo());
-						o.start();
-					}
-				}
-			}
-			if (!result.equals("")) {
-				System.out
-						.println(this.getName() + " the result is: " + result);
-			}
+            //Chose a transition whose operation should be applied
+            TFVTransition chosenTransition = null;
+            if (transitions.size() == 0) {
+                //TODO define behaviour
+            } else if (transitions.size() == 1) {
+                //No conflict exists
+                chosenTransition = transitions.get(0);
+            } else {
+                //A conflict must be solved
+                List<ConflictOption<TeamOperation>> conflictOptions = new ArrayList<>();
+                //Create options for all possible operations
+                for (TFVTransition transition : transitions) {
+                    conflictOptions.add(new PlainConflictOption<>(transition.getOperation()));
+                }
+                //Acquire the conflict resolution protocol
+                ConflictResolutionProtocol<TeamOperation> protocol = getOperationConflictProtocol();
+                //Solve the conflict
+                TeamOperation chosenOperation = protocol.solveConflict(conflictOptions).getValue();
+                //Find the matching transition
+                for (TFVTransition transition : transitions) {
+                    if (transition.getOperation().equals(chosenOperation)) {
+                        chosenTransition = transition;
+                    }
+                }
+            }
+            //Select the chosen transition to apply the operation
+            formationView.selectTransition(chosenTransition);
+            System.out.println("Operation applied: " + chosenTransition.getOperation());
+            //Enqueue the resulting new tasks
+            for (TFVPlace place : chosenTransition.getChildren()) {
+                enqueueWorking(place.getTask());
+                System.out.println(this + " enqueues " + place.getTask());
+            }
+            //Enqueue if an execution operation was chosen
+            if (chosenTransition.getOperation().getType() == OperationType.EXEC) {
+                enqueueExecuting(chosenTransition.getParent().getTask());
+                System.out.println(this + " will execute " + chosenTransition.getParent().getTask());
+            }
 		}
 	}
 
 	@Override
-	public int getLevel() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public boolean isReady() {
-		// TODO Auto-generated method stub
 		return this.isReady;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<IEckiges> getTasks() {
-		return null;
-	}
-
-	public void setTasks(List<IEckiges> tasks) {
-		// this.tasks = tasks;
 	}
 
 	public List<String> getResources() {
@@ -252,17 +263,16 @@ public class Opa implements IOpa {
 		this.communicationProtocols = communicationProtocols;
 	}
 
-	private void setIsReady(boolean r) {
-		this.isReady = r;
+	private void setIsReady(boolean isReady) {
+		this.isReady = isReady;
 	}
 
 	@Override
 	public String toString() {
-		return "Opa{" + "oma=" + oma + ", name='" + name + '\'' + ", tasks="
-		/* + tasks */+ ", resources=" + resources + ", communicationProtocols="
-				+ communicationProtocols + '}';
+		return getName();
 	}
 
+    //TODO remove?
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -289,6 +299,7 @@ public class Opa implements IOpa {
 
 	}
 
+    //TODO remove?
 	@Override
 	public int hashCode() {
 		int result = oma != null ? oma.hashCode() : 0;
@@ -303,23 +314,34 @@ public class Opa implements IOpa {
 	}
 
 	@Override
-	public void setConflictProtocol(IConflictProtocol protocol) {
-		// TODO Auto-generated method stub
-		conflictProtocols.put(protocol.getName(), protocol);
+	public void addOperationConflictProtocol(ConflictResolutionProtocol<TeamOperation> protocol) {
+		operationConflictProtocols.put(protocol.getName(), protocol);
 	}
 
-	@Override
+    @Override
+    public void addDelegationConflictProtocol(ConflictResolutionProtocol<String> protocol) {
+        delegationConflictProtocols.put(protocol.getName(), protocol);
+    }
+
+    @Override
 	public String getInducedTeamWorkflow() {
-		String res = "";
-		for (String protocol : execs.keySet()) {
-			res += protocol + "" + execs.get(protocol);
-		}
-		return res;
+        StringBuilder result = new StringBuilder();
+		for (AssignedTask task : executingTasks) {
+            result.append(task.getTask() + "\u2295");
+        }
+        if (result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
+        }
+        return result.toString();
 	}
 
-	@Override
-	public void setOpaProxys(List<IOpa> o) {
-		// TODO Auto-generated method stub
-		this.opaProxys = o;
+    @Override
+    public TFVForest getTeamFormationView() {
+        return formationView.copy();
+    }
+
+    @Override
+	public void setOpaProxies(List<IOpa> o) {
+		this.opaProxies = o;
 	}
 }

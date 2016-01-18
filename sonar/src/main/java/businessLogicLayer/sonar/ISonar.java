@@ -8,7 +8,7 @@ import dataAccessLayer.IOrganisation;
 public interface ISonar {
 
   /**
-   * Starts the Sonar process.
+   * Starts the SonarExample process.
    * @param organisation SonarOrganisation that will be the subject.
    */
   public void startSonar(IOrganisation organisation);

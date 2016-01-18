@@ -1,7 +1,7 @@
 package dataAccessLayer;
 
 import dataAccessLayer.agents.IOpa;
-import dataAccessLayer.tasks.Operation;
+import dataAccessLayer.tasks.OperationType;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface IProtocol {
 
 	public List<String> getRoles();
 	
-	public List<Operation> getApplicableOperations();
+	public List<OperationType> getApplicableOperations();
 	
 	/**
 	 * True when the protocol has been assigned to an agent

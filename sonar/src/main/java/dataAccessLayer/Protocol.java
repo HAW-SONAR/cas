@@ -1,7 +1,7 @@
 package dataAccessLayer;
 
 import dataAccessLayer.agents.IOpa;
-import dataAccessLayer.tasks.Operation;
+import dataAccessLayer.tasks.OperationType;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Protocol implements IProtocol {
     return this.roles;
   }
 
-  @Override public List<Operation> getApplicableOperations() {
+  @Override public List<OperationType> getApplicableOperations() {
     return null;
   }
 

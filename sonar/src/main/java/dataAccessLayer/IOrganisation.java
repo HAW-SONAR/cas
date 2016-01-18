@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IOrganisation {
 
-	public List<? extends IOpa> getAllOpas();
+	public List<IOpa> getOpas();
 	
-	public List<? extends IOma> getAllOmas();
+	public List<IOma> getAllOmas();
 
 	public void addOpa(IOpa opa);
 	
