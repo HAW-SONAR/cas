@@ -12,10 +12,17 @@ public interface ConflictResolutionProtocol<O> {
      * @param options The list of options that could be chosen to solve the conflict
      * @return The preferred option to solve the conflict according to the protocol
      */
-	public ConflictOption<O> solveConflict(List<ConflictOption<O>> options);
+    ConflictOption<O> solveConflict(List<ConflictOption<O>> options);
 
     /**
      * @return The protocol's identifier (name)
      */
-	public ConflictResolutionProtocolName getName();
+    ConflictResolutionProtocolName getName();
+
+    /**
+     * Processes an inter-agent conflict resolution message.
+     * @param Message The message to be processed
+     * @return The result that the inquirer will receive
+     */
+    Object handleConflictMessage(Object Message);
 }

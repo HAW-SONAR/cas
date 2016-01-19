@@ -3,13 +3,13 @@ package businessLogicLayer.sonar;
 import dataAccessLayer.IOrganisation;
 
 /**
- * Created by Daniel Hofmeister on 04.01.2016.
+ * SONAR instance that can execute the SONAR cycle for a SONAR organisation.
  */
 public interface ISonar {
 
-  /**
-   * Starts the SonarExample process.
-   * @param organisation SonarOrganisation that will be the subject.
-   */
-  public void startSonar(IOrganisation organisation);
+    /**
+     * Starts the SONAR cycle for a SONAR organisation.
+     * @param organisation The SONAR organisation
+     */
+    void startSonar(IOrganisation organisation);
 }

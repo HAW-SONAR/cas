@@ -1,43 +1,29 @@
 package dataAccessLayer.agents;
 
 
-import dataAccessLayer.protocols.ConflictOption;
-import dataAccessLayer.protocols.PlainConflictOption;
-import dataAccessLayer.protocols.ConflictResolutionProtocol;
-import dataAccessLayer.protocols.IConflictProtocolImpl_DelegationConflict_Reliability;
-import dataAccessLayer.protocols.MinMaxOperationProtocol;
-import dataAccessLayer.protocols.ConflictResolutionProtocolName;
+import dataAccessLayer.protocols.*;
 import dataAccessLayer.tasks.AssignedTask;
 import dataAccessLayer.tasks.OperationType;
 import dataAccessLayer.tasks.TeamOperation;
 import dataAccessLayer.tasks.treeReconstruction.TFVForest;
 import dataAccessLayer.tasks.treeReconstruction.TFVPlace;
 import dataAccessLayer.tasks.treeReconstruction.TFVTransition;
-import renderer.PlaceRenderer;
-import renderer.TFVRenderer;
-import renderer.TransitionRenderer;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.ForkJoinPool;
+import java.util.*;
 
 /**
- * Created by Daniel Hofmeister on 04.01.2016.
+ * Default implementation of an OPA.
  */
 public class Opa implements IOpa {
+    /**
+     * The OMA assigned to the OPA
+     */
+    private Oma oma;
+
     /**
      * The OPA's knowledge of the current team formation
      */
 	private TFVForest formationView;
-
-	private Oma oma;
 	private String name;
 	private boolean isReady = true;
 	private List<String> resources;
@@ -47,12 +33,7 @@ public class Opa implements IOpa {
 	private List<String> communicationProtocols;
 	private HashMap<ConflictResolutionProtocolName,
                     ConflictResolutionProtocol<TeamOperation>> operationConflictProtocols = new HashMap<>();
-    private HashMap<ConflictResolutionProtocolName,
-                    ConflictResolutionProtocol<String>> delegationConflictProtocols = new HashMap<>();
 	private ConflictResolutionProtocolName actualOperationConflictProtocol;
-	private ConflictResolutionProtocolName actualDelegationConflictProtocol;
-	private TFVForest tree;
-	private HashMap<String, List<String>> execs;
 	private List<IOpa> opaProxies;
 
 	public Opa(Oma oma, String name, List<TeamOperation> operations,
@@ -64,12 +45,17 @@ public class Opa implements IOpa {
         this.formationView = new TFVForest(operations);
         this.formationView.setName(name + "'s formation view");
         System.out.print(formationView);
-        this.actualOperationConflictProtocol = ConflictResolutionProtocolName.MINMAX;
-		this.actualDelegationConflictProtocol = ConflictResolutionProtocolName.RELIABILITY;
-		this.operationConflictProtocols.put(actualOperationConflictProtocol,
-				                            new MinMaxOperationProtocol(actualOperationConflictProtocol));
-		this.delegationConflictProtocols.put(actualDelegationConflictProtocol,
-                                             new IConflictProtocolImpl_DelegationConflict_Reliability(actualDelegationConflictProtocol));
+		this.operationConflictProtocols.put(ConflictResolutionProtocolName.MINTIME,
+                new MinTimeOperationProtocol(ConflictResolutionProtocolName.MINTIME));
+        this.operationConflictProtocols.put(ConflictResolutionProtocolName.AVOID_EXEC,
+                new AvoidExecOperationProtocol(ConflictResolutionProtocolName.AVOID_EXEC));
+        this.operationConflictProtocols.put(ConflictResolutionProtocolName.RANDOM,
+                new RandomOperationProtocol(ConflictResolutionProtocolName.RANDOM));
+        this.operationConflictProtocols.put(ConflictResolutionProtocolName.MINCOST,
+                new MinCostOperationProtocol(ConflictResolutionProtocolName.MINCOST, Collections.emptyList()));
+        //TODO replace
+        //Chose MINCOST
+        this.actualOperationConflictProtocol = ConflictResolutionProtocolName.MINCOST;
 		System.out.println(this.getName() + " initialized");
 	}
 
@@ -86,20 +72,21 @@ public class Opa implements IOpa {
 		generalTasks.push(task);
 	}
 
-    //TODO document
-    public void enqueueRootTask() {
-        for (AssignedTask task : getOwnRootTasks()) {
-            enqueue(task);
-			break;
-        }
-    }
-
 	@Override
 	public boolean hasExecutableTasks() {
 		return executingTasks.size() > 0;
 	}
 
-	//TODO document
+    @Override
+    public Object handleConflictMessage(ConflictResolutionProtocolName name, Object message) {
+        ConflictResolutionProtocol<?> protocol = operationConflictProtocols.get(name);
+        if (protocol == null) {
+            return null;
+        }
+        return protocol.handleConflictMessage(message);
+    }
+
+    //TODO document
     private void dequeue() {
         workingTasks.push(generalTasks.pop());
     }
@@ -319,11 +306,6 @@ public class Opa implements IOpa {
 	}
 
     @Override
-    public void addDelegationConflictProtocol(ConflictResolutionProtocol<String> protocol) {
-        delegationConflictProtocols.put(protocol.getName(), protocol);
-    }
-
-    @Override
 	public String getInducedTeamWorkflow() {
         StringBuilder result = new StringBuilder();
 		for (AssignedTask task : executingTasks) {
@@ -343,5 +325,7 @@ public class Opa implements IOpa {
     @Override
 	public void setOpaProxies(List<IOpa> o) {
 		this.opaProxies = o;
+        ((MinCostOperationProtocol) operationConflictProtocols.get(ConflictResolutionProtocolName.MINCOST))
+                .setOpaProxies(o);
 	}
 }

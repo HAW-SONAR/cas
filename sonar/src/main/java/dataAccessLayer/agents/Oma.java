@@ -1,36 +1,29 @@
 package dataAccessLayer.agents;
 
-import dataAccessLayer.IPlan;
-import dataAccessLayer.IProtocol;
-
 /**
- * Created by Daniel Hofmeister on 04.01.2016.
+ * Default implementation of an OMA.
  */
 public class Oma implements IOma {
+    /**
+     * The OMA's name
+     */
+    private String name;
 
+    /**
+     * Default constructor
+     * @param name The OMA's name
+     */
+    public Oma(String name) {
+        this.name = name;
+    }
 
-  @Override public String getName() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+    @Override
+    public String getName() {
+        return null;
+    }
 
-  @Override public void start() {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override public IPlan getLocalPlan() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override public boolean hasLocalPlan() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override public IPlan exec(IProtocol p) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+    @Override
+    public void start() {
+        //TODO not implemented yet
+    }
 }
